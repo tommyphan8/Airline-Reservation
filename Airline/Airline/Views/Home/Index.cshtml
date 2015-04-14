@@ -1,0 +1,19 @@
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about MySQL for Visual Studio visit <a href="http://www.mysql.com/why-mysql/windows/visualstudio/" title="MySQL for Visual Studio page">http://www.mysql.com/why-mysql/windows/visualstudio/</a>.
+</p>
+<h3> Catalog list</h3>
+<div> @Html.ActionLink("Account","Index", "Account")</div>
+<div> @Html.ActionLink("Aircraft","Index", "Aircraft")</div>
+<div> @Html.ActionLink("Aircraft_seats","Index", "Aircraft_seats")</div>
+<div> @Html.ActionLink("Credit_card","Index", "Credit_card")</div>
+<div> @Html.ActionLink("Flight","Index", "Flight")</div>
+<div> @Html.ActionLink("Location","Index", "Location")</div>
+<div> @Html.ActionLink("Passenger","Index", "Passenger")</div>
+<div> @Html.ActionLink("Seat_class","Index", "Seat_class")</div>
+<div> @Html.ActionLink("Ticket","Index", "Ticket")</div>
+
