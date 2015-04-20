@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_9c079b_airlineModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="Pid" />
+          </Key>
+          <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Pwd" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Pid" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aircraft">
+          <Key>
+            <PropertyRef Name="Aid" />
+          </Key>
+          <Property Name="Aid" Type="uint" Nullable="false" />
+          <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aircraft_seats">
+          <Key>
+            <PropertyRef Name="Aid" />
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Aid" Type="uint" Nullable="false" />
+          <Property Name="Sid" Type="smallint" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="airport">
+          <Key>
+            <PropertyRef Name="APcode" />
+          </Key>
+          <Property Name="APcode" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="APname" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Zipcode" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit_card">
+          <Key>
+            <PropertyRef Name="Cnum" />
+          </Key>
+          <Property Name="Cnum" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Ctype" Type="smallint" Nullable="false" />
+          <Property Name="ExMonth" Type="smallint" Nullable="false" />
+          <Property Name="ExYear" Type="int" Nullable="false" />
+          <Property Name="Pid" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="flight">
+          <Key>
+            <PropertyRef Name="Fid" />
+          </Key>
+          <Property Name="Fid" Type="uint" Nullable="false" />
+          <Property Name="Departs" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Arrives" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Dtime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Atime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="BasePrice" Type="float" Nullable="false" />
+          <Property Name="Aid" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="passenger">
+          <Key>
+            <PropertyRef Name="Pid" />
+          </Key>
+          <Property Name="Pid" Type="uint" Nullable="false" />
+          <Property Name="FName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Mname" Type="varchar" MaxLength="30" />
+          <Property Name="LName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="13" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seat_class">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="smallint" Nullable="false" />
+          <Property Name="Sname" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="Tid" />
+          </Key>
+          <Property Name="Tid" Type="uint" Nullable="false" />
+          <Property Name="FinalPrice" Type="float" Nullable="false" />
+          <Property Name="Status" Type="bool" Nullable="false" />
+          <Property Name="SeatNum" Type="int" Nullable="false" />
+          <Property Name="SeatClass" Type="smallint" Nullable="false" />
+          <Property Name="Fid" Type="uint" Nullable="false" />
+          <Property Name="Pid" Type="uint" Nullable="false" />
+          <Property Name="Num_of_bags" Type="uint" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_9c079b_airlineModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="aircraft" EntityType="Self.aircraft" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="aircraft_seats" EntityType="Self.aircraft_seats" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="airport" EntityType="Self.airport" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="credit_card" EntityType="Self.credit_card" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="flight" EntityType="Self.flight" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="passenger" EntityType="Self.passenger" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="seat_class" EntityType="Self.seat_class" Schema="db_9c079b_airline" store:Type="Tables" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" Schema="db_9c079b_airline" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_9c079b_airlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="Pid" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pwd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pid" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aircraft">
+          <Key>
+            <PropertyRef Name="Aid" />
+          </Key>
+          <Property Name="Aid" Type="Int64" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aircraft_seats">
+          <Key>
+            <PropertyRef Name="Aid" />
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Aid" Type="Int64" Nullable="false" />
+          <Property Name="Sid" Type="Int16" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="airport">
+          <Key>
+            <PropertyRef Name="APcode" />
+          </Key>
+          <Property Name="APcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APname" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="credit_card">
+          <Key>
+            <PropertyRef Name="Cnum" />
+          </Key>
+          <Property Name="Cnum" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ctype" Type="Int16" Nullable="false" />
+          <Property Name="ExMonth" Type="Int16" Nullable="false" />
+          <Property Name="ExYear" Type="Int32" Nullable="false" />
+          <Property Name="Pid" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="flight">
+          <Key>
+            <PropertyRef Name="Fid" />
+          </Key>
+          <Property Name="Fid" Type="Int64" Nullable="false" />
+          <Property Name="Departs" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Arrives" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Dtime" Type="DateTime" Nullable="false" />
+          <Property Name="Atime" Type="DateTime" Nullable="false" />
+          <Property Name="BasePrice" Type="Single" Nullable="false" />
+          <Property Name="Aid" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="passenger">
+          <Key>
+            <PropertyRef Name="Pid" />
+          </Key>
+          <Property Name="Pid" Type="Int64" Nullable="false" />
+          <Property Name="FName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="seat_class">
+          <Key>
+            <PropertyRef Name="Sid" />
+          </Key>
+          <Property Name="Sid" Type="Int16" Nullable="false" />
+          <Property Name="Sname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="Tid" />
+          </Key>
+          <Property Name="Tid" Type="Int64" Nullable="false" />
+          <Property Name="FinalPrice" Type="Single" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="SeatNum" Type="Int32" Nullable="false" />
+          <Property Name="SeatClass" Type="Int16" Nullable="false" />
+          <Property Name="Fid" Type="Int64" Nullable="false" />
+          <Property Name="Pid" Type="Int64" Nullable="false" />
+          <Property Name="Num_of_bags" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="db_9c079b_airlineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.account" />
+          <EntitySet Name="aircraft" EntityType="Self.aircraft" />
+          <EntitySet Name="aircraft_seats" EntityType="Self.aircraft_seats" />
+          <EntitySet Name="airports" EntityType="Self.airport" />
+          <EntitySet Name="credit_card" EntityType="Self.credit_card" />
+          <EntitySet Name="flights" EntityType="Self.flight" />
+          <EntitySet Name="passengers" EntityType="Self.passenger" />
+          <EntitySet Name="seat_class" EntityType="Self.seat_class" />
+          <EntitySet Name="tickets" EntityType="Self.ticket" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_9c079b_airlineModelStoreContainer" CdmEntityContainer="db_9c079b_airlineEntities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aircraft">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.aircraft">
+              <MappingFragment StoreEntitySet="aircraft">
+                <ScalarProperty Name="Aid" ColumnName="Aid" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aircraft_seats">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.aircraft_seats">
+              <MappingFragment StoreEntitySet="aircraft_seats">
+                <ScalarProperty Name="Aid" ColumnName="Aid" />
+                <ScalarProperty Name="Sid" ColumnName="Sid" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="airports">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.airport">
+              <MappingFragment StoreEntitySet="airport">
+                <ScalarProperty Name="APcode" ColumnName="APcode" />
+                <ScalarProperty Name="APname" ColumnName="APname" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="credit_card">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.credit_card">
+              <MappingFragment StoreEntitySet="credit_card">
+                <ScalarProperty Name="Cnum" ColumnName="Cnum" />
+                <ScalarProperty Name="Ctype" ColumnName="Ctype" />
+                <ScalarProperty Name="ExMonth" ColumnName="ExMonth" />
+                <ScalarProperty Name="ExYear" ColumnName="ExYear" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flights">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.flight">
+              <MappingFragment StoreEntitySet="flight">
+                <ScalarProperty Name="Fid" ColumnName="Fid" />
+                <ScalarProperty Name="Departs" ColumnName="Departs" />
+                <ScalarProperty Name="Arrives" ColumnName="Arrives" />
+                <ScalarProperty Name="Dtime" ColumnName="Dtime" />
+                <ScalarProperty Name="Atime" ColumnName="Atime" />
+                <ScalarProperty Name="BasePrice" ColumnName="BasePrice" />
+                <ScalarProperty Name="Aid" ColumnName="Aid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="passengers">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.passenger">
+              <MappingFragment StoreEntitySet="passenger">
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="Mname" ColumnName="Mname" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seat_class">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.seat_class">
+              <MappingFragment StoreEntitySet="seat_class">
+                <ScalarProperty Name="Sid" ColumnName="Sid" />
+                <ScalarProperty Name="Sname" ColumnName="Sname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tickets">
+            <EntityTypeMapping TypeName="db_9c079b_airlineModel.ticket">
+              <MappingFragment StoreEntitySet="ticket">
+                <ScalarProperty Name="Tid" ColumnName="Tid" />
+                <ScalarProperty Name="FinalPrice" ColumnName="FinalPrice" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SeatNum" ColumnName="SeatNum" />
+                <ScalarProperty Name="SeatClass" ColumnName="SeatClass" />
+                <ScalarProperty Name="Fid" ColumnName="Fid" />
+                <ScalarProperty Name="Pid" ColumnName="Pid" />
+                <ScalarProperty Name="Num_of_bags" ColumnName="Num_of_bags" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

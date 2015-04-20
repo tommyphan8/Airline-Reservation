@@ -1,0 +1,14 @@
+﻿@model IEnumerable<FlightReservation.Models.flight>
+@{
+    ViewBag.Title = "SearchResult";
+}
+
+<h2>SearchResult</h2>
+
+
+
+
+@foreach (var item in Model) {
+    @item.Departs;
+    @item.Arrives;
+}

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_9c079b_airlineModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="account">
+    <Key>
+      <PropertyRef Name="Pid" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Pwd" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Pid" Type="uint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aircraft">
+    <Key>
+      <PropertyRef Name="Aid" />
+    </Key>
+    <Property Name="Aid" Type="uint" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aircraft_seats">
+    <Key>
+      <PropertyRef Name="Aid" />
+      <PropertyRef Name="Sid" />
+    </Key>
+    <Property Name="Aid" Type="uint" Nullable="false" />
+    <Property Name="Sid" Type="smallint" Nullable="false" />
+    <Property Name="Capacity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="airport">
+    <Key>
+      <PropertyRef Name="APcode" />
+    </Key>
+    <Property Name="APcode" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="APname" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Zipcode" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="City" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="credit_card">
+    <Key>
+      <PropertyRef Name="Cnum" />
+    </Key>
+    <Property Name="Cnum" Type="varchar" MaxLength="13" Nullable="false" />
+    <Property Name="Ctype" Type="smallint" Nullable="false" />
+    <Property Name="ExMonth" Type="smallint" Nullable="false" />
+    <Property Name="ExYear" Type="int" Nullable="false" />
+    <Property Name="Pid" Type="uint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="flight">
+    <Key>
+      <PropertyRef Name="Fid" />
+    </Key>
+    <Property Name="Fid" Type="uint" Nullable="false" />
+    <Property Name="Departs" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="Arrives" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="Dtime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="Atime" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="BasePrice" Type="float" Nullable="false" />
+    <Property Name="Aid" Type="uint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="passenger">
+    <Key>
+      <PropertyRef Name="Pid" />
+    </Key>
+    <Property Name="Pid" Type="uint" Nullable="false" />
+    <Property Name="FName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Mname" Type="varchar" MaxLength="30" />
+    <Property Name="LName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="13" Nullable="false" />
+  </EntityType>
+  <EntityType Name="seat_class">
+    <Key>
+      <PropertyRef Name="Sid" />
+    </Key>
+    <Property Name="Sid" Type="smallint" Nullable="false" />
+    <Property Name="Sname" Type="varchar" MaxLength="40" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ticket">
+    <Key>
+      <PropertyRef Name="Tid" />
+    </Key>
+    <Property Name="Tid" Type="uint" Nullable="false" />
+    <Property Name="FinalPrice" Type="float" Nullable="false" />
+    <Property Name="Status" Type="bool" Nullable="false" />
+    <Property Name="SeatNum" Type="int" Nullable="false" />
+    <Property Name="SeatClass" Type="smallint" Nullable="false" />
+    <Property Name="Fid" Type="uint" Nullable="false" />
+    <Property Name="Pid" Type="uint" Nullable="false" />
+    <Property Name="Num_of_bags" Type="uint" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="db_9c079b_airlineModelStoreContainer">
+    <EntitySet Name="account" EntityType="Self.account" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="aircraft" EntityType="Self.aircraft" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="aircraft_seats" EntityType="Self.aircraft_seats" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="airport" EntityType="Self.airport" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="credit_card" EntityType="Self.credit_card" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="flight" EntityType="Self.flight" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="passenger" EntityType="Self.passenger" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="seat_class" EntityType="Self.seat_class" Schema="db_9c079b_airline" store:Type="Tables" />
+    <EntitySet Name="ticket" EntityType="Self.ticket" Schema="db_9c079b_airline" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

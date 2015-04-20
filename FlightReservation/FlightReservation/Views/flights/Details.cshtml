@@ -1,0 +1,66 @@
+﻿@model FlightReservation.Models.flight
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>flight</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Departs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Arrives)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Arrives)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dtime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dtime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Atime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Atime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BasePrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BasePrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aid)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Fid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
