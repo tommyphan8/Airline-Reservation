@@ -9,3 +9,6 @@ D:\dropbox\Airline\Airline\bin\EntityFramework.SqlServer.dll
 D:\dropbox\Airline\Airline\bin\MySql.Data.Entity.EF6.dll
 D:\dropbox\Airline\Airline\bin\EntityFramework.xml
 D:\dropbox\Airline\Airline\bin\EntityFramework.SqlServer.xml
+D:\Users\Tommy\Desktop\CPSC 362 Project\Airline-Reservation\Airline\Airline\obj\Debug\Airline.csprojResolveAssemblyReference.cache
+D:\Users\Tommy\Desktop\CPSC 362 Project\Airline-Reservation\Airline\Airline\obj\Debug\Airline.dll
+D:\Users\Tommy\Desktop\CPSC 362 Project\Airline-Reservation\Airline\Airline\obj\Debug\Airline.pdb
