@@ -173,6 +173,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\accountsController.cs" />
     <Compile Include="Controllers\flightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -308,6 +309,11 @@
     <Content Include="Views\flights\Index.cshtml" />
     <Content Include="Views\flights\SearchInput.cshtml" />
     <Content Include="Views\flights\SearchResult.cshtml" />
+    <Content Include="Views\accounts\Create.cshtml" />
+    <Content Include="Views\accounts\Delete.cshtml" />
+    <Content Include="Views\accounts\Details.cshtml" />
+    <Content Include="Views\accounts\Edit.cshtml" />
+    <Content Include="Views\accounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

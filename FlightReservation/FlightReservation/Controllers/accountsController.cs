@@ -7,138 +7,110 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FlightReservation.Models;
-using System.Data.Entity.SqlServer;
 
 namespace FlightReservation.Controllers
 {
-    public class flightsController : Controller
+    public class accountsController : Controller
     {
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();
 
-        // GET: flights
+        // GET: accounts
         public ActionResult Index()
         {
-            return View(db.flights.ToList());
-        }
-        public ActionResult SearchResult(FormCollection collection)
-        {
-            //string date = collection.Get("dDate");
-            DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
-            DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
-            string dAirport = collection.Get("dAirport");
-            string aAirport = collection.Get("aAirport");
-
-            //DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
-            //string dAirport = collection.Get("dAirport");
-           var flight = from f in db.flights select f;
-
-           //flight = flight.Where(s => s.Departs.Contains(dAirport));
-            //flight = flight.Where(s => s.Dtime => collection.Get("dDate"));
-           flight = flight.Where(s => s.Dtime >= dDate)
-           .Where(s => s.Departs.Contains(dAirport))
-           .Where(s => s.Departs.Contains(dAirport));
-               //flight = flight.Where(s => s.Atime >= aDate);
-        
-
-
-            return View(flight);
-        }
-        public ActionResult SearchInput()
-        {
-            return View();
+            return View(db.accounts.ToList());
         }
 
-        // GET: flights/Details/5
+        // GET: accounts/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            flight flight = db.flights.Find(id);
-            if (flight == null)
+            account account = db.accounts.Find(id);
+            if (account == null)
             {
                 return HttpNotFound();
             }
-            return View(flight);
+            return View(account);
         }
 
-        // GET: flights/Create
+        // GET: accounts/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: flights/Create
+        // POST: accounts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Fid,Departs,Arrives,Dtime,Atime,BasePrice,Aid")] flight flight)
+        public ActionResult Create([Bind(Include = "Email,Pwd,Pid")] account account)
         {
             if (ModelState.IsValid)
             {
-                db.flights.Add(flight);
+                db.accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(flight);
+            return View(account);
         }
 
-        // GET: flights/Edit/5
+        // GET: accounts/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            flight flight = db.flights.Find(id);
-            if (flight == null)
+            account account = db.accounts.Find(id);
+            if (account == null)
             {
                 return HttpNotFound();
             }
-            return View(flight);
+            return View(account);
         }
 
-        // POST: flights/Edit/5
+        // POST: accounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Fid,Departs,Arrives,Dtime,Atime,BasePrice,Aid")] flight flight)
+        public ActionResult Edit([Bind(Include = "Email,Pwd,Pid")] account account)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(flight).State = EntityState.Modified;
+                db.Entry(account).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(flight);
+            return View(account);
         }
 
-        // GET: flights/Delete/5
+        // GET: accounts/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            flight flight = db.flights.Find(id);
-            if (flight == null)
+            account account = db.accounts.Find(id);
+            if (account == null)
             {
                 return HttpNotFound();
             }
-            return View(flight);
+            return View(account);
         }
 
-        // POST: flights/Delete/5
+        // POST: accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            flight flight = db.flights.Find(id);
-            db.flights.Remove(flight);
+            account account = db.accounts.Find(id);
+            db.accounts.Remove(account);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

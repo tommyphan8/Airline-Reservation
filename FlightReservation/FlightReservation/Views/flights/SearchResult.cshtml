@@ -1,14 +1,63 @@
 ﻿@model IEnumerable<FlightReservation.Models.flight>
 @{
-    ViewBag.Title = "SearchResult";
+    ViewBag.Title = "Search Result";
 }
 
-<h2>SearchResult</h2>
+<h2>Search Result</h2>
 
 
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Departs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Arrives)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dtime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Atime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BasePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aid)
+        </th>
+        <th></th>
+    </tr>
 
-@foreach (var item in Model) {
-    @item.Departs;
-    @item.Arrives;
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departs)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrives)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dtime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Atime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aid)
+            </td>
+            <td>
+                @Html.ActionLink("Book", "Book", new { id = item.Fid }) 
+                @*@Html.ActionLink("Details", "Details", new { id = item.Fid })*@ 
+               
+            </td>
+        </tr>
+    }
+
+</table>
