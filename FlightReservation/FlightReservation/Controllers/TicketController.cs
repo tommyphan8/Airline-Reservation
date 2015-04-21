@@ -6,28 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Airline.Models;
+using FlightReservation.Models;
 
-namespace Airline.Controllers
+namespace FlightReservation.Controllers
 {
     public class TicketController : Controller
     {
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();
-
-
-        public ActionResult Result(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ticket ticket = db.tickets.Find(id);
-            if (ticket == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ticket);
-        }
 
         // GET: /Ticket/
         public ActionResult Index()
@@ -50,30 +35,6 @@ namespace Airline.Controllers
             return View(ticket);
         }
 
-        public ActionResult SearchFlight(string depart_input, string arrives, DateTime? dDate)
-        {
-            var flight = from f in db.flights select f;
-
-            if (!String.IsNullOrEmpty(depart_input))
-            {
-                flight = flight.Where(s => s.Departs.Contains(depart_input));
-
-            }
-
-            if (!String.IsNullOrEmpty(arrives))
-            {
-                flight = flight.Where(s => s.Arrives.Contains(arrives));
-            }
-
-            if (dDate != null)
-            {
-                flight = flight.Where(s => s.Dtime >= dDate);// this one means u select all the flight from the departure date
-            }
-
-
-            return View(flight);
-        }
-
         // GET: /Ticket/Create
         public ActionResult Create(string Fid, string Pid)
         {
@@ -91,7 +52,7 @@ namespace Airline.Controllers
             {
                 db.tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Result",ticket.Tid.ToString());
+                return RedirectToAction("Index");
             }
 
             return View(ticket);
