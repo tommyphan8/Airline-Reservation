@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "SearchInput";
+}
+
+<h2>Search For Flights</h2>
+
+@using (Html.BeginForm("SearchResult", "ticket"))
+{
+    <form>
+        
+        Departure Date: <input id="Departure" name="dDate" type="date"> <br />
+        @*Arrival Date: <input id="Arrival" name="aDate" type="date"> <br />*@
+        Departure Airport<input type="text" name="dAirport" /> <br />
+        Arrival Airport<input type="text" name="aAirport" /> <br />
+                
+        <input type="submit" value="Submit">
+
+    </form>
+    
+}

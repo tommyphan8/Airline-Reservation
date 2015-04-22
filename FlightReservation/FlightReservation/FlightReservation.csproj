@@ -177,6 +177,7 @@
     <Compile Include="Controllers\flightsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PassengerController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -320,6 +321,14 @@
     <Content Include="Views\Ticket\Details.cshtml" />
     <Content Include="Views\Ticket\Edit.cshtml" />
     <Content Include="Views\Ticket\Index.cshtml" />
+    <Content Include="Views\Ticket\SearchResult.cshtml" />
+    <Content Include="Views\Ticket\SearchInput.cshtml" />
+    <Content Include="Views\Passenger\Create.cshtml" />
+    <Content Include="Views\Passenger\Delete.cshtml" />
+    <Content Include="Views\Passenger\Details.cshtml" />
+    <Content Include="Views\Passenger\Edit.cshtml" />
+    <Content Include="Views\Passenger\Index.cshtml" />
+    <Content Include="Views\Ticket\Passenger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
