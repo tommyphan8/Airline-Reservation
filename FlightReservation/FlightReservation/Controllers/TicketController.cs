@@ -98,13 +98,17 @@ namespace FlightReservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Tid,FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket)
+        public ActionResult Create([Bind(Include="FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket, int Pid, int Fid)
         {
             if (ModelState.IsValid)
             {
+                flight flight = db.flights.Find(Fid);
+                ticket.FinalPrice = flight.BasePrice;
+                ticket.Pid = Pid;
                 db.tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                int tid= db.tickets.Count();
+                return RedirectToAction("Details", "Ticket", new { id = tid });
             }
 
             return View(ticket);

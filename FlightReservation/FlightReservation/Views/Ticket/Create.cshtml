@@ -15,13 +15,14 @@
         <hr />
         @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tid, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tid)
-                @Html.ValidationMessageFor(model => model.Tid)
-            </div>
+        @*<div class="form-group">
+        @Html.LabelFor(model => model.Tid, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Tid)
+            @Html.ValidationMessageFor(model => model.Tid)
         </div>
+    </div>*@
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.FinalPrice, new { @class = "control-label col-md-2" })
@@ -54,22 +55,24 @@
                 @Html.ValidationMessageFor(model => model.SeatClass)
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fid, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Fid)
-                @Html.ValidationMessageFor(model => model.Fid)
-            </div>
+@*<div class="form-group">
+        @Html.LabelFor(model => model.Fid, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Fid)
+            @Html.ValidationMessageFor(model => model.Fid)
         </div>
-
-        <div class="form-group">
+    </div>
+    <div class="form-group">
             @Html.LabelFor(model => model.Pid, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Pid)
                 @Html.ValidationMessageFor(model => model.Pid)
             </div>
         </div>
+    *@
+        
+
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Num_of_bags, new { @class = "control-label col-md-2" })
@@ -81,12 +84,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Submit" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Search", "SearchFlight")
 </div>
