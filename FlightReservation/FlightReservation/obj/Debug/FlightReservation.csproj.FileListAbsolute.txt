@@ -163,6 +163,5 @@ C:\Users\linh\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReser
 C:\Users\linh\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReservation\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\linh\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReservation\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\linh\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReservation\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\linh\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.csprojResolveAssemblyReference.cache
 C:\Users\linh\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.dll
 C:\Users\linh\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.pdb

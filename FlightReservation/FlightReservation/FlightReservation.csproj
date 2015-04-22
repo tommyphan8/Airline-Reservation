@@ -322,7 +322,7 @@
     <Content Include="Views\Ticket\Edit.cshtml" />
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Ticket\SearchResult.cshtml" />
-    <Content Include="Views\Ticket\SearchInput.cshtml" />
+    <Content Include="Views\Ticket\SearchFlight.cshtml" />
     <Content Include="Views\Passenger\Create.cshtml" />
     <Content Include="Views\Passenger\Delete.cshtml" />
     <Content Include="Views\Passenger\Details.cshtml" />

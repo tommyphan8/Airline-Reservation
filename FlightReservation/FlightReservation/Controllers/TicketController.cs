@@ -20,35 +20,57 @@ namespace FlightReservation.Controllers
             return View(db.tickets.ToList());
         }
 
-        public ActionResult SearchInput()
+        public ActionResult SearchFlight()
         {
             return View();
         }
 
-        public ActionResult SearchResult(FormCollection collection)
+        public ActionResult SearchResult(string depart_input, string arrives, DateTime? dDate)
         {
-            //string date = collection.Get("dDate");
-            DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
-            DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
-            string dAirport = collection.Get("dAirport");
-            string aAirport = collection.Get("aAirport");
-
-            //DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
-            //string dAirport = collection.Get("dAirport");
             var flight = from f in db.flights select f;
 
-            //flight = flight.Where(s => s.Departs.Contains(dAirport));
-            //flight = flight.Where(s => s.Dtime => collection.Get("dDate"));
-            flight = flight.Where(s => s.Dtime >= dDate)
-            .Where(s => s.Departs.Contains(dAirport))
-            .Where(s => s.Departs.Contains(dAirport));
-            //flight = flight.Where(s => s.Atime >= aDate);
+            if (!String.IsNullOrEmpty(depart_input))
+            {
+                flight = flight.Where(s => s.Departs.Contains(depart_input));
 
+            }
+
+            if (!String.IsNullOrEmpty(arrives))
+            {
+                flight = flight.Where(s => s.Arrives.Contains(arrives));
+            }
+
+            if (dDate != null)
+            {
+                flight = flight.Where(s => s.Dtime >= dDate);// this one means u select all the flight from the departure date
+            }
 
 
             return View(flight);
         }
 
+
+        public ActionResult Passenger(string fid)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Passenger([Bind(Include = "FName,Mname,LName,DOB,Gender,Phone")] passenger passenger, string fid)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.passengers.Add(passenger);
+                db.SaveChanges();
+                int pid = db.passengers.Count();
+                return RedirectToAction("Create", "Ticket", new{Pid=pid, Fid=fid});
+               
+            }
+
+            return View(passenger);
+        }
 
         // GET: /Ticket/Details/5
         public ActionResult Details(long? id)

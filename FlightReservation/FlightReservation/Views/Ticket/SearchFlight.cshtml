@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Search for a flight";
+}
+
+<h2>Search For a Flights</h2>
+
+@using (Html.BeginForm("SearchResult","Ticket"))
+{
+    <p>
+  
+        From: @Html.TextBox("depart_input")
+        To: @Html.TextBox("arrives")
+        Departure Date: <input id="Departure" name="dDate" type="date"> <br /><br />
+      @*@Html.ActionLink("Search", "SearchResult", depart_input, arrives, dDate)*@  
+        <input type="submit" value="Search">
+    </p>
+      
+    
+}

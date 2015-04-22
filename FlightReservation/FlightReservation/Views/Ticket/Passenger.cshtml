@@ -11,7 +11,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>passenger</h4>
         <hr />
         @Html.ValidationSummary(true)
 
@@ -24,7 +23,7 @@
     </div>*@      
 
         <div class="form-group">
-            @Html.Label("First Name")
+            @Html.Label("First Name", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FName)
                 @Html.ValidationMessageFor(model => model.FName)
@@ -32,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Middle Name")
+            @Html.Label("Middle Name", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Mname)
                 @Html.ValidationMessageFor(model => model.Mname)
@@ -40,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Last Name")
+            @Html.Label("Last Name", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LName)
                 @Html.ValidationMessageFor(model => model.LName)
@@ -48,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Date Of Bith")
+            @Html.Label("Date Of Bith", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DOB)
                 @Html.ValidationMessageFor(model => model.DOB)
@@ -73,12 +72,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Next" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Search", "SearchFlight")
 </div>
