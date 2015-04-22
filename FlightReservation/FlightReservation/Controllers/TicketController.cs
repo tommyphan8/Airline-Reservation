@@ -103,7 +103,7 @@ namespace FlightReservation.Controllers
             if (ModelState.IsValid)
             {
                 flight flight = db.flights.Find(Fid);
-                ticket.FinalPrice = flight.BasePrice;
+                ticket.FinalPrice = flight.BasePrice ;
                 ticket.Pid = Pid;
                 db.tickets.Add(ticket);
                 db.SaveChanges();
