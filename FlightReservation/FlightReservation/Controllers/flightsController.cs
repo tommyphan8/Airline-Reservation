@@ -8,38 +8,50 @@ using System.Web;
 using System.Web.Mvc;
 using FlightReservation.Models;
 using System.Data.Entity.SqlServer;
+using System.Security.Principal;
+using Microsoft.AspNet.Identity;
+
 
 namespace FlightReservation.Controllers
-{
+{   
+    
+    [Authorize]
     public class flightsController : Controller
     {
+
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();
 
         // GET: flights
         public ActionResult Index()
         {
+            
             return View(db.flights.ToList());
         }
         public ActionResult SearchResult(FormCollection collection)
         {
-            //string date = collection.Get("dDate");
             DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
             DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
             string dAirport = collection.Get("dAirport");
             string aAirport = collection.Get("aAirport");
 
-            //DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
-            //string dAirport = collection.Get("dAirport");
-           var flight = from f in db.flights select f;
+            var flight = from f in db.flights select f;
 
-           //flight = flight.Where(s => s.Departs.Contains(dAirport));
-            //flight = flight.Where(s => s.Dtime => collection.Get("dDate"));
-           flight = flight.Where(s => s.Dtime >= dDate)
-           .Where(s => s.Departs.Contains(dAirport))
-           .Where(s => s.Departs.Contains(dAirport));
-               //flight = flight.Where(s => s.Atime >= aDate);
-        
 
+            flight = flight.Where(s => s.Dtime >= dDate)
+            .Where(s => s.Departs.Contains(dAirport))
+            .Where(s => s.Departs.Contains(dAirport));
+
+
+
+            string temp = User.Identity.GetUserName();
+            var accountSess = from a in db.accounts select a;
+            accountSess = accountSess.Where(s => s.Email.Contains(temp));
+            var list = accountSess.ToList();
+            var pid = list[0].Pid;
+            System.Diagnostics.Debug.WriteLine(pid);
+                     
+
+          
 
             return View(flight);
         }

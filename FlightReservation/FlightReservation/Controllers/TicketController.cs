@@ -7,16 +7,40 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FlightReservation.Models;
+using Microsoft.AspNet.Identity;
+
+
 
 namespace FlightReservation.Controllers
 {
+
+
+
+    [Authorize] // This prevents user from accessing TicketController without logging in.
     public class TicketController : Controller
     {
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();
 
+        public string Pid()
+        {
+            
+                string temp = User.Identity.GetUserName();
+                var accountSess = from a in db.accounts select a;
+                accountSess = accountSess.Where(s => s.Email.Contains(temp));
+                var list = accountSess.ToList();
+                string pid = list[0].Pid.ToString();
+                System.Diagnostics.Debug.WriteLine(pid);
+                return pid;
+           
+         }
+        
+        
+
         // GET: /Ticket/
         public ActionResult Index()
         {
+           
+            System.Diagnostics.Debug.WriteLine(Pid());
             return View(db.tickets.ToList());
         }
 

@@ -224,7 +224,6 @@
     <Compile Include="Models\seat_class.cs">
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\QuerySearch.cs" />
     <Compile Include="Models\ticket.cs">
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>
