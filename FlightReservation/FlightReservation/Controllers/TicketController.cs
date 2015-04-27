@@ -21,14 +21,13 @@ namespace FlightReservation.Controllers
     {
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();
 
-        public string Pid()
+        public long Pid()
         {
-            
                 string temp = User.Identity.GetUserName();
                 var accountSess = from a in db.accounts select a;
                 accountSess = accountSess.Where(s => s.Email.Contains(temp));
                 var list = accountSess.ToList();
-                string pid = list[0].Pid.ToString();
+                long pid = list[0].Pid;
                 System.Diagnostics.Debug.WriteLine(pid);
                 return pid;
            
@@ -122,13 +121,13 @@ namespace FlightReservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket, int Pid, int Fid)
+        public ActionResult Create([Bind(Include="FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket, int Fid)
         {
             if (ModelState.IsValid)
             {
                 flight flight = db.flights.Find(Fid);
                 ticket.FinalPrice = flight.BasePrice ;
-                ticket.Pid = Pid;
+                ticket.Pid = Pid();
                 db.tickets.Add(ticket);
                 db.SaveChanges();
                 int tid= db.tickets.Count();
