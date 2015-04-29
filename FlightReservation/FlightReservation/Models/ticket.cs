@@ -14,6 +14,7 @@ namespace FlightReservation.Models
     
     public partial class ticket
     {
+
         public long Tid { get; set; }
         public float FinalPrice { get; set; }
         public bool Status { get; set; }
@@ -22,5 +23,8 @@ namespace FlightReservation.Models
         public long Fid { get; set; }
         public long Pid { get; set; }
         public long Num_of_bags { get; set; }
+
     }
+
+    
 }

@@ -14,8 +14,6 @@ using Microsoft.AspNet.Identity;
 namespace FlightReservation.Controllers
 {
 
-
-
     [Authorize] // This prevents user from accessing TicketController without logging in.
     public class TicketController : Controller
     {
@@ -32,8 +30,15 @@ namespace FlightReservation.Controllers
                 return pid;
            
          }
-        
-        
+
+        //public float Price(long Fid)
+        //{
+        //    var flight = from f in db.flights select f;
+        //    flight = flight.Where(s => s.Fid.Equals(Fid));
+        //    retu
+        //}
+
+
 
         // GET: /Ticket/
         public ActionResult Index()
@@ -73,8 +78,13 @@ namespace FlightReservation.Controllers
         }
 
 
-        public ActionResult Passenger(string fid)
+        public ActionResult Passenger(string fid, float price)
         {
+            long temp = Pid();
+            if (temp != null)
+            {
+                return RedirectToAction("Create", "Ticket", new { Fid = fid, price=price });
+            }
             return View();
         }
 
@@ -87,8 +97,8 @@ namespace FlightReservation.Controllers
             {
                 db.passengers.Add(passenger);
                 db.SaveChanges();
-                int pid = db.passengers.Count();
-                return RedirectToAction("Create", "Ticket", new{Pid=pid, Fid=fid});
+                
+                return RedirectToAction("Create", "Ticket", new{ Fid=fid});
                
             }
 
@@ -113,6 +123,8 @@ namespace FlightReservation.Controllers
         // GET: /Ticket/Create
         public ActionResult Create(string Fid)
         {
+            
+            
             return View();
         }
 
@@ -125,13 +137,14 @@ namespace FlightReservation.Controllers
         {
             if (ModelState.IsValid)
             {
+                long tid = db.tickets.Count();
                 flight flight = db.flights.Find(Fid);
                 ticket.FinalPrice = flight.BasePrice ;
                 ticket.Pid = Pid();
+                ticket.Tid = tid + 1;
                 db.tickets.Add(ticket);
                 db.SaveChanges();
-                int tid= db.tickets.Count();
-                return RedirectToAction("Details", "Ticket", new { id = tid });
+                return RedirectToAction("Details", "Ticket", new { id = tid+1 });
             }
 
             return View(ticket);
