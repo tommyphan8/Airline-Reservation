@@ -36,11 +36,14 @@ namespace FlightReservation.Controllers
 
             var flight = from f in db.flights select f;
 
-
+            
             flight = flight.Where(s => s.Dtime >= dDate)
             .Where(s => s.Departs.Contains(dAirport))
             .Where(s => s.Departs.Contains(dAirport));
 
+            var ticket = from t in db.tickets select t;
+            ticket = ticket.Where(s => s.Pid.Equals(123));
+            
 
 
             string temp = User.Identity.GetUserName();

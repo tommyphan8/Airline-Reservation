@@ -80,11 +80,11 @@ namespace FlightReservation.Controllers
 
         public ActionResult Passenger(string fid, float price)
         {
-            //long temp = Pid();
-            //if (temp != null)
-            //{
-            //    return RedirectToAction("Create", "Ticket", new { Fid = fid, price=price });
-            //}
+            long temp = Pid();
+            if (temp != null)
+            {
+                return RedirectToAction("Create", "Ticket", new { Fid = fid, price = price });
+            }
             return View();
         }
 
