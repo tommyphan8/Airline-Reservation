@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FlightReservation.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FlightReservation.Controllers
 {
@@ -152,16 +153,42 @@ namespace FlightReservation.Controllers
         {
             if (ModelState.IsValid)
             {
+         
+                //Create an Admin account manually .. only once needed 
+                /*Now working currently
+                const string Adminname = "Admin@mail.com";
+                const string AdminPass = "Admin1234.";
+                var Adminuser = new ApplicationUser { UserName = Adminname, Email = Adminname };
+                var readmin = await UserManager.CreateAsync(Adminuser, AdminPass);
+                if (readmin.Succeeded)
+                {
+                    await SignInManager.SignInAsync(Adminuser, isPersistent: false, rememberBrowser: false);
+
+                    var role = UserManager.AddToRole(Adminname, "Admin");
+                    
+                }
+                */
+                //------------End Admin Account------------------//
+
                 account temp = new account();
                 Random random = new Random();
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
-
+                    //test to see if admin works , Now everyone is an admin.
                     string userEmail = model.Email;
+                    var userId = user.Id;
 
-                    
+
+                    var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+                    if (!roleManager.RoleExists("Admin"))
+                        roleManager.Create(new IdentityRole("Admin"));
+               
+                    var role = UserManager.AddToRole(userId, "Admin");
+           
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     temp.Email = userEmail;
                     temp.Pwd = "NULL";
@@ -175,7 +202,7 @@ namespace FlightReservation.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
