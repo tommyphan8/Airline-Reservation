@@ -19,28 +19,28 @@
     </div>
     //first name
     <div class="form-group">
-        @Html.LabelFor(m => m.firstName, new { @class = "col-md-2 control-label" })
+        @Html.Label("First Name", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.firstName, new { @class = "form-control" })
         </div>
     </div>
     //middle name
     <div class="form-group">
-        @Html.LabelFor(m => m.middleName, new { @class = "col-md-2 control-label" })
+        @Html.Label("Middle Name", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.middleName, new { @class = "form-control" })
         </div>
     </div>
     //last name
     <div class="form-group">
-        @Html.LabelFor(m => m.lastName, new { @class = "col-md-2 control-label" })
+        @Html.Label("Last Name", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.lastName, new { @class = "form-control" })
         </div>
     </div>
     //dob
     <div class="form-group">
-        @Html.LabelFor(m => m.dob, new { @class = "col-md-2 control-label" })
+        @Html.Label("Date of Birth", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             
             @Html.EditorFor(m => m.dob, new { @class = "form-control" })
@@ -48,7 +48,7 @@
     </div>
     //gender
     <div class="form-group">
-        @Html.LabelFor(m => m.gender, new { @class = "col-md-2 control-label" })
+        @Html.Label("Gender", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.DropDownListFor(model => model.gender, new List<SelectListItem>
            {
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.phoneNum, new { @class = "col-md-2 control-label" })
+        @Html.Label("Phone", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.EditorFor(m => m.phoneNum, new { @class = "form-control" })
         </div>
@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.Label("Confirm Password", new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
