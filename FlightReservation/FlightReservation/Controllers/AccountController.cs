@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FlightReservation.Models;
+using System.Data.Entity.Validation;
 
 namespace FlightReservation.Controllers
 {
@@ -153,21 +154,54 @@ namespace FlightReservation.Controllers
             if (ModelState.IsValid)
             {
                 account temp = new account();
+                passenger temp1 = new passenger();
                 Random random = new Random();
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, firstName = model.firstName, lastName = model.lastName, middleName = model.middleName, dob = model.dob,
+                gender = model.gender, phoneNum = model.phoneNum};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
 
-                    string userEmail = model.Email;
+                    int pid = random.Next();
+
+     
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
+                    temp.Email = model.Email;
+                    temp.Pwd = "NULL";
+                    temp.Pid = pid;
+
+                    temp1.FName = model.firstName;
+                    temp1.LName = model.lastName;
+                    temp1.Mname = model.middleName;
+                    temp1.DOB = model.dob;
+                    temp1.Gender = model.gender;
+                    temp1.Phone = model.phoneNum;
+                    temp1.Pid = pid;
+
+                    db.accounts.Add(temp);
+                    db.passengers.Add(temp1);
+                    db.SaveChanges();
+
+                    //try
+                    //{
+                    //    db1.SaveChanges();
+                    //}
+                    
+                    //catch (DbEntityValidationException dbEx)
+                    //{
+                    //    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    //    {
+                    //        foreach (var validationError in validationErrors.ValidationErrors)
+                    //        {
+                    //            System.Diagnostics.Debug.WriteLine("Property: {0} Error: {1}",
+                    //                       validationError.PropertyName, validationError.ErrorMessage);
+                    //        }
+                    //    }
+                    //}
 
                     
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    temp.Email = userEmail;
-                    temp.Pwd = "NULL";
-                    temp.Pid = random.Next();
-                    db.accounts.Add(temp);
-                    db.SaveChanges();
+
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

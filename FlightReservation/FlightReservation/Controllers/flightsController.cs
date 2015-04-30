@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity;
 namespace FlightReservation.Controllers
 {   
     
-    [Authorize]
+    
     public class flightsController : Controller
     {
 
