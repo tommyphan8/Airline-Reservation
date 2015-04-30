@@ -12,12 +12,94 @@
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.seat-charts.css">
 
 <h2>Create</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
+    <div class="form-horizontal">
+        <h4>ticket</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Tid, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tid)
+                    @Html.ValidationMessageFor(model => model.Tid)
+                </div>
+            </div>
+                    <div class="form-group">
+                    @Html.LabelFor(model => model.FinalPrice, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.FinalPrice)
+                        @Html.ValidationMessageFor(model => model.FinalPrice)
+                    </div>
+                </div>
+                           <div class="form-group">
+                    @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Status)
+                        @Html.ValidationMessageFor(model => model.Status)
+                    </div>
+                </div>
+        *@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SeatNum, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SeatNum)
+                @Html.ValidationMessageFor(model => model.SeatNum)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Pick a Seat Class", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SeatClass, new List<SelectListItem>
+           {
+               new SelectListItem{Text = "Economy Class", Value = "1", Selected=true},
+               new SelectListItem{Text = "First Class", Value ="2" }
+           }, new { @class = "seat_class" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Number of Bags", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Num_of_bags, new List<SelectListItem>
+           {
+               new SelectListItem{Text = "1", Value = "1", Selected=true},
+               new SelectListItem{Text = "2", Value ="2" },
+               new SelectListItem{Text = "3", Value ="3"},
+               new SelectListItem{Text = "4", Value ="4"},
+               new SelectListItem{Text = "5", Value ="5"}
+           })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Total Price", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FinalPrice)
+                @Html.ValidationMessageFor(model => model.FinalPrice)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
 <html>
 <body>
 		<div class="wrapper">
 			<div class="container">
 				<div id="seat-map">
+                    <h4>Pick a seat</h4>
 					<div class="front-indicator">Front</div>
 					
 				</div>
@@ -47,6 +129,7 @@
 				var $cart = $('#selected-seats'),
 					$counter = $('#counter'),
 					$total = $('#total'),
+                    $FinalPrice = $('#FinalPrice'),
 					sc = $('#seat-map').seatCharts({
 					map: [
 						'ffff',
@@ -94,6 +177,7 @@
 								.attr('id', 'cart-item-'+this.settings.id)
 								.data('seatId', this.settings.id)
 								.appendTo($cart);
+							$("#SeatNum").val(this.settings.label);
 							
 							/*
 							 * Lets update the counter and total
@@ -102,7 +186,8 @@
 							 * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
 							 */
 							$counter.text(sc.find('selected').length+1);
-							$total.text(recalculateTotal(sc)+this.data().price);
+							$total.text(recalculateTotal(sc) + this.data().price);
+							$FinalPrice.val(recalculateTotal(sc) + this.data().price);
 							
 							return 'selected';
 						} else if (this.status() == 'selected') {
@@ -111,7 +196,7 @@
 							$counter.text(sc.find('selected').length-1);
 							//and total
 							$total.text(recalculateTotal(sc)-this.data().price);
-						
+							$FinalPrice.val(recalculateTotal(sc) - this.data().price);
 							//remove the item from our cart
 							$('#cart-item-'+this.settings.id).remove();
 						
@@ -133,7 +218,33 @@
 				});
 
 				//let's pretend some seats have already been booked
-				sc.get(['1_4', '4_1', '7_1', '7_2']).status('unavailable');
+				//sc.get(['1_4', '4_1', '7_1', '7_2']).status('unavailable');
+
+			    //when user change seat class
+				$(".seat_class").change(function () {
+				    if (this.value == 1) {//user pick eco class
+				        sc.get(['1_1', '1_2', '1_3', '1_4']).status('unavailable');
+				        sc.get(['2_1', '2_2', '2_4', '2_5',
+				                '3_1', '3_2', '3_4', '3_5',
+				                '4_1', '4_2', '4_4', '4_5',
+				                '5_1', '5_2',
+				                '6_1', '6_2', '6_4', '6_5',
+				                '7_1', '7_2', '7_4', '7_5',
+				                '8_1', '8_2', '8_4', '8_5',
+				                '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('available');
+				    } else if (this.value == 2) { // user pick first class
+				        sc.get(['1_1', '1_2', '1_3', '1_4']).status('available');
+				        sc.get(['2_1', '2_2', '2_4', '2_5',
+				                '3_1', '3_2', '3_4', '3_5',
+				                '4_1', '4_2', '4_4', '4_5',
+				                '5_1', '5_2',
+				                '6_1', '6_2', '6_4', '6_5',
+				                '7_1', '7_2', '7_4', '7_5',
+				                '8_1', '8_2', '8_4', '8_5',
+				                '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('unavailable');
+				    } 
+
+				});
 		
 		});
 
@@ -142,101 +253,20 @@
 		
 			//basically find every selected seat and sum its price
 			sc.find('selected').each(function () {
-				total += this.data().price;
+			    total += this.data().price;
+
 			});
 			
 			return total;
 		}
-		
+
+
 		</script>
 	</body>
 </html>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>ticket</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Tid, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tid)
-                    @Html.ValidationMessageFor(model => model.Tid)
-                </div>
-            </div>
-                    <div class="form-group">
-                    @Html.LabelFor(model => model.FinalPrice, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.FinalPrice)
-                        @Html.ValidationMessageFor(model => model.FinalPrice)
-                    </div>
-                </div>
-                           <div class="form-group">
-                    @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Status)
-                        @Html.ValidationMessageFor(model => model.Status)
-                    </div>
-                </div>
-        *@
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SeatNum, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SeatNum)
-                @Html.ValidationMessageFor(model => model.SeatNum)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Seat Class", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SeatClass, new List<SelectListItem>
-           {
-               new SelectListItem{Text = "Economy Class", Value = "1", Selected=true},
-               new SelectListItem{Text = "Premium Economy Class", Value ="2" },
-               new SelectListItem{Text = "Business Class", Value ="3"},
-               new SelectListItem{Text = "First Class", Value ="4"},
-           }, new { @class="seat_class"})
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Number of Bags", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Num_of_bags, new List<SelectListItem>
-           {
-               new SelectListItem{Text = "1", Value = "1", Selected=true},
-               new SelectListItem{Text = "2", Value ="2" },
-               new SelectListItem{Text = "3", Value ="3"},
-               new SelectListItem{Text = "4", Value ="4"},
-               new SelectListItem{Text = "5", Value ="5"}
-           })
-
-            </div>
-        </div>
-
-        <div class="form-group">
-        @Html.Label("Total", new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-
-            
-        </div>
-    </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
 
 <div>
     @Html.ActionLink("Back to Search", "SearchFlight")
