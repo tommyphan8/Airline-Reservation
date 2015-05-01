@@ -140,7 +140,7 @@ namespace FlightReservation.Controllers
             {
                 long tid = db.tickets.Count();
                 flight flight = db.flights.Find(Fid);
-                ticket.FinalPrice = flight.BasePrice ;
+                //ticket.FinalPrice = flight.BasePrice ;
                 ticket.Pid = Pid();
                 ticket.Tid = tid + 1;
                 db.tickets.Add(ticket);
