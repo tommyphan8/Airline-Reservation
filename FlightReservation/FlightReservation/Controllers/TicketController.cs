@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using FlightReservation.Models;
 using Microsoft.AspNet.Identity;
+using System.Net.Mail;
 
 
 
@@ -38,7 +39,30 @@ namespace FlightReservation.Controllers
         //    retu
         //}
 
+        // send confirmation email
+        public void sendEmail()
+        {
+            var mailMessage = new MailMessage();
+            mailMessage.To.Add("linhcao1611@yahoo.com");
+            mailMessage.From = new MailAddress("mrlinh1611@gmail.com");
+            mailMessage.Subject = "testing 2 ";
+            mailMessage.Body = "Hello Mr. Aderson";
+            mailMessage.IsBodyHtml = false;
 
+            var smptClient = new SmtpClient { EnableSsl = true };
+            smptClient.Credentials = CredentialCache.DefaultNetworkCredentials;
+            
+            try
+            {
+                smptClient.Send(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception caught in CreateMessageWithAttachment(): {0}",
+                      ex.ToString());
+            }
+
+        }
 
         // GET: /Ticket/
         public ActionResult Index()
