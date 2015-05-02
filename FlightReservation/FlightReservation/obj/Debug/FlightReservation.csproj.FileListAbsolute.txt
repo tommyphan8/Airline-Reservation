@@ -388,3 +388,4 @@ C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\bin
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.dll
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.pdb
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.csprojResolveAssemblyReference.cache
