@@ -10,9 +10,8 @@
     ViewBag.Title = "Booking";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.seat-charts.css">
-<link rel="stylesheet" type="text/css" href="~/Content/seatStyle.css">
 
-<h2>Create</h2>
+<h2>Booking</h2>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -110,11 +109,34 @@
                     $basePrice = @Request.Params["price"],
                     fnum = @Request.Params["fnum"],                    
                     econum = @Request.Params["econum"];
-			    var seatmap =[], i;
-			    
+			    var seatmap =[], i, unavail =['15_0','2_0','9_3','1_8','2_2','3_2'];
+
+			    //var urlParams;
+			    //var s="?Fid=1&price=95&fnum=50&econum=100&arr=%279_3%27%2C%271_8%27%2C%272_2%27%2C%273_2%27%2C";
+			    //(window.onpopstate = function () {
+			    //    var match,
+                //        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+                //        search = /([^&=]+)=?([^&]*)/g,
+                //        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                //        query  = window.location.search.substring(1);
+
+			    //    urlParams = {};
+			    //    while (match = search.exec(query))
+			    //        urlParams[decode(match[1])] = decode(match[2]);
+			    //})();
+			    //var list = urlParams["arr"];
+			    //var list = ViewBag.list;
+			    //var unseat= Url.Content()
+			   // unseat = decodeURI(unseat);
+
+
+
 			    for(i=0;i<fnum/10;i++){
 			        seatmap.push('ffffffffff');
 			    }
+			    //for(i=0;i<fnum%10;i++){
+
+			    //}
 			    for(i=0;i<econum/10;i++){
 			        seatmap.push('eeeeeeeeee');
 			    }
@@ -140,19 +162,11 @@
 							return firstSeatLabel++;
 						},
 					},
-					legend : {
-						node : $('#legend'),
-					    items : [
-							[ 'f', 'available',   'First Class' ],
-							[ 'e', 'available',   'Economy Class'],
-							[ 'f', 'unavailable', 'Already Booked']
-					    ]
-					},
 					click: function () {
 						if (this.status() == 'available' && counterS < 1) {
 							counterS += 1;
 							//let's create a new <li> which we'll add to the cart items
-							$('<li>'+this.data().category+' Seat # '+this.settings.label+': <b>$'+this.data().price+'</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+							$('<li>'+this.data().category+' Seat # '+this.settings.label+'</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
 								.attr('id', 'cart-item-'+this.settings.id)
 								.data('seatId', this.settings.id)
 								.appendTo($cart);
@@ -200,32 +214,25 @@
 
 				//let's pretend some seats have already been booked
 				//sc.get(['1_4', '4_1', '7_1', '7_2']).status('unavailable');
+				var funavailable="", eunavailable="";
+				
 
-			    //when user change seat class
+			    // when user change seat class
+                // not working
 				$(".seat_class").change(function () {
 				    if (this.value == 1) {//user pick eco class
 				        var i,j,r,c,temp;
-				        var unavailable=[];
-				        for(i=0;i<fnum;i++){
-				            r=fnum/10 +1;
-				            c=fnum%10;
-				            temp="'"+r + "_"+c+"',";
-				            unavailable.push(temp);
+				        
+				        for(i=0;i<fnum-1;i++){
+				            r=i/10 +1;
+				            c=i%10;
+				            temp+="'"+r + "_"+c+"',";
+				            funavailable.push(temp);
 				        }
-
-
-				        $test.text(unavailable);
-				        sc.get(unavailable).status('unavailable');
-				        sc.get('1_1').status('unavailable');
-				        //sc.get(['1_1', '1_2', '1_3', '1_4']).status('unavailable');
-				        //sc.get(['2_1', '2_2', '2_4', '2_5',
-				        //        '3_1', '3_2', '3_4', '3_5',
-				        //        '4_1', '4_2', '4_4', '4_5',
-				        //        '5_1', '5_2',
-				        //        '6_1', '6_2', '6_4', '6_5',
-				        //        '7_1', '7_2', '7_4', '7_5',
-				        //        '8_1', '8_2', '8_4', '8_5',
-				        //        '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('available');
+				        funavailable+="'"+(fnum/10+1)+"_"+(fnum%10)+"'";
+				        sc.get([funavailable]).status('unavailable');
+				        
+				        
 				    } else if (this.value == 2) { // user pick first class
 				        //sc.get(['1_1', '1_2', '1_3', '1_4']).status('available');
 				        //sc.get(['2_1', '2_2', '2_4', '2_5',

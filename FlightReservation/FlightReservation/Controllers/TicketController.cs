@@ -37,15 +37,30 @@ namespace FlightReservation.Controllers
         {
             var temp = from a in db.tickets select a;
             temp = temp.Where(a => a.Fid.Equals(fid));
+            //var n = temp.Count();
             var list = temp.ToList();
-            int i, j;
+            int i, j,k;
             string taken = "";
-            foreach (var item in list)
+            if (list.Count != 0)
             {
-                i = item.SeatNum / 10 + 1;
-                j = item.SeatNum % 10;
-                taken += "'"+i + '_' + j + "',";
+                i = list[0].SeatNum / 10 + 1;
+                j = list[0].SeatNum % 10;
+                taken += "'" + i + "_" + j + "'";
+                for (k = 1; k < list.Count; k++)
+                {
+                    i = list[k].SeatNum / 10 + 1;
+                    j = list[k].SeatNum % 10;
+                    taken += ",'" + i + "_" + j + "'";
+                }
             }
+           
+            //foreach (var item in list)
+            //{
+            //    //i = item.SeatNum / 10 + 1;
+            //    //j = item.SeatNum % 10;
+            //    //taken += "'"+i + '_' + j + "',";
+            //    taken += item.SeatNum;
+            //}
             Console.Write(taken);
             return taken;
         }
@@ -199,7 +214,6 @@ namespace FlightReservation.Controllers
         }
 
 
-        [Authorize]
         public ActionResult Passenger(string fid, float price)
         {
             long temp = Pid();
@@ -234,7 +248,6 @@ namespace FlightReservation.Controllers
         }
 
         // GET: /Ticket/Details/5
-        [Authorize]
         public ActionResult Details(long? id)
         {
             if (id == null)
@@ -250,10 +263,9 @@ namespace FlightReservation.Controllers
         }
 
         // GET: /Ticket/Create
-        [Authorize(Roles = "admin")]
-        public ActionResult Create(string Fid)
+        public ActionResult Create(string Fid, string taken)
         {
-
+            ViewBag.list = taken;
 
             return View();
         }
@@ -275,13 +287,12 @@ namespace FlightReservation.Controllers
                 ticket.Tid = random.Next();
                 db.tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Ticket", new { id = ticket.Tid });
+                return RedirectToAction("listTicket", "Ticket");
             }
 
             return View(ticket);
         }
 
-        [Authorize(Roles = "admin")]
         // GET: /Ticket/Edit/5
         public ActionResult Edit(long? id)
         {
@@ -314,7 +325,6 @@ namespace FlightReservation.Controllers
         }
 
         // GET: /Ticket/Delete/5
-        [Authorize(Roles = "admin")]
         public ActionResult Delete(long? id)
         {
             if (id == null)
