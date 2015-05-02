@@ -124,3 +124,45 @@ D:\Users\Tommy\Desktop\CPSC 362 Project\Airline-Reservation\FlightReservation\In
 D:\Users\Tommy\Desktop\CPSC 362 Project\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.csprojResolveAssemblyReference.cache
 D:\Users\Tommy\Desktop\CPSC 362 Project\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.dll
 D:\Users\Tommy\Desktop\CPSC 362 Project\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.pdb
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\IndexViewControllerTest.dll.config
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\IndexViewControllerTest.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\IndexViewControllerTest.pdb
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\EntityFramework.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\FlightReservation.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Helpers.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Mvc.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Razor.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.WebPages.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Optimization.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Owin.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\FlightReservation.pdb
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\EntityFramework.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Helpers.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Mvc.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Razor.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.WebPages.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\System.Web.Optimization.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.Security.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.csprojResolveAssemblyReference.cache
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.dll
+C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.pdb

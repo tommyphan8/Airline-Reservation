@@ -29,20 +29,33 @@ namespace FlightReservation.Controllers
         }
         public ActionResult SearchResult(FormCollection collection)
         {
-            DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
-            DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
-            string dAirport = collection.Get("dAirport");
-            string aAirport = collection.Get("aAirport");
+            var check = collection.Get("dDate");
+            if (check == "")
+            {
+                //just an error catch, tried js client side, didnt work. this is for temporary fix only
+                ModelState.AddModelError("Departure", "Please select a Date");
+                return RedirectToAction("SearchResult");
+            }
+            else
+            {
+                DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
+                DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
+                string dAirport = collection.Get("dAirport");
+                string aAirport = collection.Get("aAirport");
 
-            var flight = from f in db.flights select f;
+                var flight = from f in db.flights select f;
+
+
+                flight = flight.Where(s => s.Dtime >= dDate)
+                .Where(s => s.Departs.Contains(dAirport))
+                .Where(s => s.Arrives.Contains(aAirport));
+                return View(flight);
+
+            }
+           
+
 
             
-            flight = flight.Where(s => s.Dtime >= dDate)
-            .Where(s => s.Departs.Contains(dAirport))
-            .Where(s => s.Arrives.Contains(aAirport));
-
-
-            return View(flight);
         }
         public ActionResult SearchInput()
         {
