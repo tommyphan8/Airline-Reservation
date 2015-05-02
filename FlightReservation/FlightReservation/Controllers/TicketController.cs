@@ -31,6 +31,7 @@ namespace FlightReservation.Controllers
                 return pid;
            
          }
+        
 
 
    
@@ -100,13 +101,30 @@ namespace FlightReservation.Controllers
 
         }
 
+        //error handling code for user who tired to access to ticket
         // GET: /Ticket/
+        [Authorize] 
         public ActionResult Index()
         {
+            if (User.IsInRole("admin"))
+            {
+                System.Diagnostics.Debug.WriteLine(Pid());
+                return View(db.tickets.ToList());
+
+
+            }
+            else
+            {
+                return RedirectToAction("listTicket");
+            }
            
-            System.Diagnostics.Debug.WriteLine(Pid());
-            return View(db.tickets.ToList());
+            
         }
+
+
+
+
+
 
         public ActionResult SearchFlight()
         {
