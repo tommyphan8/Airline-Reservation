@@ -32,31 +32,33 @@ else if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
                     <ul class="dropdown-menu" role="menu">
                         <li>@Html.ActionLink("Create New User", "register", "Account", routeValues: null, htmlAttributes: new { id = "1" })</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Create New Flight", "Create", "flights", routeValues: null, htmlAttributes: new { id = "2" })</li>
+                        <li>@Html.ActionLink("List All Account", "Index", "accounts", routeValues: null, htmlAttributes: new { id = "2" })</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("View Passager", "Index", "Passenger", routeValues: null, htmlAttributes: new { id = "3" })</li>
+                        <li>@Html.ActionLink("List All Passager", "Index", "Passenger", routeValues: null, htmlAttributes: new { id = "3" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Delete Account", "Delete", "accounts", routeValues: null, htmlAttributes: new { id = "4" })</li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Flight <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink("Create New User", "register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("List All Flight", "Index", "flights", routeValues: null, htmlAttributes: new { id = "5" })</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Create New Flight", "Create", "flights", routeValues: null, htmlAttributes: new { id = "createFlight" })</li>
+                        <li>@Html.ActionLink("Create New Flight", "Create", "flights", routeValues: null, htmlAttributes: new { id = "6" })</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("View Passager", "Index", "Passenger", routeValues: null, htmlAttributes: new { id = "passengerLink" })</li>
+                        <li>@Html.ActionLink("Delete Flight", "Delete", "flights", routeValues: null, htmlAttributes: new { id = "7" })</li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Ticket <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li>@Html.ActionLink("Check All tickets", "Index", "Ticket", routeValues: null, htmlAttributes: new { id = "checkTicket" })</li>
+                        <li>@Html.ActionLink("Check All tickets", "Index", "Ticket", routeValues: null, htmlAttributes: new { id = "8" })</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("Create New Flight", "Create", "flights", routeValues: null, htmlAttributes: new { id = "createFlight" })</li>
+                        <li>@Html.ActionLink("Create Ticket", "Create", "Ticket", routeValues: null, htmlAttributes: new { id = "9" })</li>
                         <li class="divider"></li>
-                        <li>@Html.ActionLink("View Passager", "Index", "Passenger", routeValues: null, htmlAttributes: new { id = "passengerLink" })</li>
+                        <li>@Html.ActionLink("Delete Ticket", "Delete", "Ticket", routeValues: null, htmlAttributes: new { id = "10" })</li>
                     </ul>
                 </li>
 
