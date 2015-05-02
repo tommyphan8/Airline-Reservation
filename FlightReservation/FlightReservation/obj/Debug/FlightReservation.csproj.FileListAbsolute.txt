@@ -389,7 +389,6 @@ C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\bin
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.dll
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.pdb
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.csprojResolveAssemblyReference.cache
-<<<<<<< HEAD
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\FlightReservation\bin\FlightReservation.dll.config
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\FlightReservation\bin\FlightReservation.dll
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\FlightReservation\bin\FlightReservation.pdb
@@ -446,6 +445,3 @@ C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\FlightReserv
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\FlightReservation\obj\Debug\FlightReservation.dll
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\FlightReservation\obj\Debug\FlightReservation.pdb
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\FlightReservation\obj\Debug\FlightReservation.csprojResolveAssemblyReference.cache
-C:\Users\gam3r\Documents\GitHub\Airline-Reservation\FlightReservation\FlightReservation\obj\Debug\FlightReservation.csprojResolveAssemblyReference.cache
-=======
->>>>>>> origin/master

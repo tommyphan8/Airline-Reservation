@@ -166,7 +166,6 @@ C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTe
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.csprojResolveAssemblyReference.cache
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.dll
 C:\Users\reg\Desktop\Airline-Reservation\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.pdb
-<<<<<<< HEAD
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\IndexViewControllerTest\bin\Debug\IndexViewControllerTest.dll.config
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\IndexViewControllerTest\bin\Debug\IndexViewControllerTest.dll
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\IndexViewControllerTest\bin\Debug\IndexViewControllerTest.pdb
@@ -209,5 +208,3 @@ C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\IndexViewCon
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.csprojResolveAssemblyReference.cache
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.dll
 C:\Users\gam3r\Desktop\Airline-Reservation-master\FlightReservation\IndexViewControllerTest\obj\Debug\IndexViewControllerTest.pdb
-=======
->>>>>>> origin/master
