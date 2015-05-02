@@ -1,209 +1,39 @@
-﻿@model FlightReservation.Models.ticket 
+﻿@model FlightReservation.Models.ticket
 
 @section scripts
 {
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="~/Scripts/jquery.seat-charts.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="~/Scripts/jquery.seat-charts.js"></script>
 }
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Booking";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.seat-charts.css">
+<link rel="stylesheet" type="text/css" href="~/Content/seatStyle.css">
 
 <h2>Create</h2>
-
-<html>
-<body>
-		<div class="wrapper">
-			<div class="container">
-				<div id="seat-map">
-					<div class="front-indicator">Front</div>
-					
-				</div>
-				<div class="booking-details">
-					<h2>Booking Details</h2>
-					
-					<h3> Selected Seats (<span id="counter">0</span>):</h3>
-					<ul id="selected-seats"></ul>
-					
-					Total: <b>$<span id="total">0</span></b>
-					
-					<button class="checkout-button">Checkout &raquo;</button>
-					
-					<div id="legend"></div>
-				</div>
-			</div>
-		</div>
-		
-		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="~/Scripts/jquery.seat-charts.js"></script>
-		
-		<script>
-			var firstSeatLabel = 1;
-			var counterS = 0;
-		
-			$(document).ready(function() {
-				var $cart = $('#selected-seats'),
-					$counter = $('#counter'),
-					$total = $('#total'),
-					sc = $('#seat-map').seatCharts({
-					map: [
-						'ffff',
-						'ff_ff',
-						'ee_ee',
-						'ee_ee',
-						'ee___',
-						'ee_ee',
-						'ee_ee',
-						'ee_ee',
-						'eeeee',
-					],
-					seats: {
-						f: {
-							price   : 100,
-							classes : 'first-class', //your custom CSS class
-							category: 'First Class'
-						},
-						e: {
-							price   : 40,
-							classes : 'economy-class', //your custom CSS class
-							category: 'Economy Class'
-						}					
-					
-					},
-					naming : {
-						top : false,
-						getLabel : function (character, row, column) {
-							return firstSeatLabel++;
-						},
-					},
-					legend : {
-						node : $('#legend'),
-					    items : [
-							[ 'f', 'available',   'First Class' ],
-							[ 'e', 'available',   'Economy Class'],
-							[ 'f', 'unavailable', 'Already Booked']
-					    ]					
-					},
-					click: function () {
-						if (this.status() == 'available' && counterS < 1) {
-							counterS += 1;
-							//let's create a new <li> which we'll add to the cart items
-							$('<li>'+this.data().category+' Seat # '+this.settings.label+': <b>$'+this.data().price+'</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
-								.attr('id', 'cart-item-'+this.settings.id)
-								.data('seatId', this.settings.id)
-								.appendTo($cart);
-							
-							/*
-							 * Lets update the counter and total
-							 *
-							 * .find function will not find the current seat, because it will change its stauts only after return
-							 * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
-							 */
-							$counter.text(sc.find('selected').length+1);
-							$total.text(recalculateTotal(sc)+this.data().price);
-							
-							return 'selected';
-						} else if (this.status() == 'selected') {
-							counterS -= 1;
-							//update the counter
-							$counter.text(sc.find('selected').length-1);
-							//and total
-							$total.text(recalculateTotal(sc)-this.data().price);
-						
-							//remove the item from our cart
-							$('#cart-item-'+this.settings.id).remove();
-						
-							//seat has been vacated
-							return 'available';
-						} else if (this.status() == 'unavailable') {
-							//seat has been already booked
-							return 'unavailable';
-						} else {
-							return this.style();
-						}
-					}
-				});
-
-				//this will handle "[cancel]" link clicks
-				$('#selected-seats').on('click', '.cancel-cart-item', function () {
-					//let's just trigger Click event on the appropriate seat, so we don't have to repeat the logic here
-					sc.get($(this).parents('li:first').data('seatId')).click();
-				});
-
-				//let's pretend some seats have already been booked
-				sc.get(['1_4', '4_1', '7_1', '7_2']).status('unavailable');
-		
-		});
-
-		function recalculateTotal(sc) {
-			var total = 0;
-		
-			//basically find every selected seat and sum its price
-			sc.find('selected').each(function () {
-				total += this.data().price;
-			});
-			
-			return total;
-		}
-		
-		</script>
-	</body>
-</html>
-
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ticket</h4>
         <hr />
         @Html.ValidationSummary(true)
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Tid, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tid)
-                    @Html.ValidationMessageFor(model => model.Tid)
-                </div>
-            </div>
-                    <div class="form-group">
-                    @Html.LabelFor(model => model.FinalPrice, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.FinalPrice)
-                        @Html.ValidationMessageFor(model => model.FinalPrice)
-                    </div>
-                </div>
-                           <div class="form-group">
-                    @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Status)
-                        @Html.ValidationMessageFor(model => model.Status)
-                    </div>
-                </div>
-        *@
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SeatNum, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.SeatNum)
-                @Html.ValidationMessageFor(model => model.SeatNum)
-            </div>
+        <div class="col-md-10" hidden>
+            @Html.EditorFor(model => model.SeatNum)
+            @Html.ValidationMessageFor(model => model.SeatNum)
         </div>
 
+
         <div class="form-group">
-            @Html.Label("Seat Class", new { @class = "control-label col-md-2" })
+            @Html.Label("Pick a Seat Class", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.SeatClass, new List<SelectListItem>
            {
                new SelectListItem{Text = "Economy Class", Value = "1", Selected=true},
-               new SelectListItem{Text = "Premium Economy Class", Value ="2" },
-               new SelectListItem{Text = "Business Class", Value ="3"},
-               new SelectListItem{Text = "First Class", Value ="4"},
-           }, new { @class="seat_class"})
+               new SelectListItem{Text = "First Class", Value ="2" }
+           }, new { @class = "seat_class" })
             </div>
         </div>
 
@@ -217,18 +47,40 @@
                new SelectListItem{Text = "3", Value ="3"},
                new SelectListItem{Text = "4", Value ="4"},
                new SelectListItem{Text = "5", Value ="5"}
-           })
+           }, new { @class = "numbag" })
 
             </div>
         </div>
 
-        <div class="form-group">
-        @Html.Label("Total", new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="wrapper">
+            <div class="container">
+                <div id="seat-map">
+                    <h4>Pick a seat</h4>
+                    <div class="front-indicator">Front</div>
 
-            
+                </div>
+                <div class="booking-details">
+                    <h2>Booking Details</h2>
+
+                    <h3> Selected Seats (<span id="counter">0</span>):</h3>
+                    <ul id="selected-seats"></ul>
+
+                    Total: <b>$<span id="total" value=@Request.Params["price"]>0</span></b>
+
+                    <div id="legend"></div>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10" hidden>
+                @Html.EditorFor(model => model.FinalPrice)
+
+
+
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -237,6 +89,178 @@
         </div>
     </div>
 }
+<html>
+<body>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="~/Scripts/jquery.seat-charts.js"></script>
+
+    <script>
+			var firstSeatLabel = 1;
+			var counterS = 0;
+
+			$(document).ready(function() {
+			    var $cart = $('#selected-seats'),
+					$counter = $('#counter'),
+					$total = $('#total'),
+                    $test = $('#test'),
+                    $FinalPrice = $('#FinalPrice'),
+                    $numbag = 0,
+                    $basePrice = @Request.Params["price"],
+                    fnum = @Request.Params["fnum"],                    
+                    econum = @Request.Params["econum"];
+			    var seatmap =[], i;
+			    
+			    for(i=0;i<fnum/10;i++){
+			        seatmap.push('ffffffffff');
+			    }
+			    for(i=0;i<econum/10;i++){
+			        seatmap.push('eeeeeeeeee');
+			    }
+
+				var	sc = $('#seat-map').seatCharts({
+					map: seatmap,
+					seats: {
+						f: {
+							price   : 100,
+							classes : 'first-class', //your custom CSS class
+							category: 'First Class'
+						},
+						e: {
+							price   : 40,
+							classes : 'economy-class', //your custom CSS class
+							category: 'Economy Class'
+						}
+
+					},
+					naming : {
+						top : false,
+						getLabel : function (character, row, column) {
+							return firstSeatLabel++;
+						},
+					},
+					legend : {
+						node : $('#legend'),
+					    items : [
+							[ 'f', 'available',   'First Class' ],
+							[ 'e', 'available',   'Economy Class'],
+							[ 'f', 'unavailable', 'Already Booked']
+					    ]
+					},
+					click: function () {
+						if (this.status() == 'available' && counterS < 1) {
+							counterS += 1;
+							//let's create a new <li> which we'll add to the cart items
+							$('<li>'+this.data().category+' Seat # '+this.settings.label+': <b>$'+this.data().price+'</b> <a href="#" class="cancel-cart-item">[cancel]</a></li>')
+								.attr('id', 'cart-item-'+this.settings.id)
+								.data('seatId', this.settings.id)
+								.appendTo($cart);
+							$("#SeatNum").val(this.settings.label);
+
+							/*
+							 * Lets update the counter and total
+							 *
+							 * .find function will not find the current seat, because it will change its stauts only after return
+							 * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
+							 */
+							$counter.text(sc.find('selected').length+1);
+							$total.text(recalculateTotal(sc) + this.data().price + $basePrice + $numbag );
+							$FinalPrice.val(recalculateTotal(sc) + this.data().price + $basePrice);
+
+							return 'selected';
+						} else if (this.status() == 'selected') {
+							counterS -= 1;
+							//update the counter
+							$counter.text(sc.find('selected').length-1);
+							//and total
+							$total.text(recalculateTotal(sc)-this.data().price);
+							$FinalPrice.val(recalculateTotal(sc) - this.data().price);
+							//remove the item from our cart
+							$('#cart-item-'+this.settings.id).remove();
+
+							//seat has been vacated
+							return 'available';
+						} else if (this.status() == 'unavailable') {
+							//seat has been already booked
+							return 'unavailable';
+						} else {
+							return this.style();
+						}
+					}
+				});
+
+
+
+				//this will handle "[cancel]" link clicks
+				$('#selected-seats').on('click', '.cancel-cart-item', function () {
+					//let's just trigger Click event on the appropriate seat, so we don't have to repeat the logic here
+					sc.get($(this).parents('li:first').data('seatId')).click();
+				});
+
+				//let's pretend some seats have already been booked
+				//sc.get(['1_4', '4_1', '7_1', '7_2']).status('unavailable');
+
+			    //when user change seat class
+				$(".seat_class").change(function () {
+				    if (this.value == 1) {//user pick eco class
+				        var i,j,r,c,temp;
+				        var unavailable=[];
+				        for(i=0;i<fnum;i++){
+				            r=fnum/10 +1;
+				            c=fnum%10;
+				            temp="'"+r + "_"+c+"',";
+				            unavailable.push(temp);
+				        }
+
+
+				        $test.text(unavailable);
+				        sc.get(unavailable).status('unavailable');
+				        sc.get('1_1').status('unavailable');
+				        //sc.get(['1_1', '1_2', '1_3', '1_4']).status('unavailable');
+				        //sc.get(['2_1', '2_2', '2_4', '2_5',
+				        //        '3_1', '3_2', '3_4', '3_5',
+				        //        '4_1', '4_2', '4_4', '4_5',
+				        //        '5_1', '5_2',
+				        //        '6_1', '6_2', '6_4', '6_5',
+				        //        '7_1', '7_2', '7_4', '7_5',
+				        //        '8_1', '8_2', '8_4', '8_5',
+				        //        '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('available');
+				    } else if (this.value == 2) { // user pick first class
+				        //sc.get(['1_1', '1_2', '1_3', '1_4']).status('available');
+				        //sc.get(['2_1', '2_2', '2_4', '2_5',
+				        //        '3_1', '3_2', '3_4', '3_5',
+				        //        '4_1', '4_2', '4_4', '4_5',
+				        //        '5_1', '5_2',
+				        //        '6_1', '6_2', '6_4', '6_5',
+				        //        '7_1', '7_2', '7_4', '7_5',
+				        //        '8_1', '8_2', '8_4', '8_5',
+				        //        '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('unavailable');
+				    }
+
+				});
+
+		});
+
+		function recalculateTotal(sc) {
+			var total = 0;
+
+			//basically find every selected seat and sum its price
+			sc.find('selected').each(function () {
+			    total += this.data().price ;
+
+			});
+
+			return total;
+		}
+
+
+    </script>
+</body>
+</html>
+
+
+
 
 <div>
     @Html.ActionLink("Back to Search", "SearchFlight")

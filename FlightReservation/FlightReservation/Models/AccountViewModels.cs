@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FlightReservation.Models
@@ -79,6 +80,17 @@ namespace FlightReservation.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string firstName { get; set; }
+        public string middleName { get; set; }
+        public string lastName { get; set; }
+
+        [Display(Name = "Date of Birth")]
+        [DataType(DataType.Date)]
+        public DateTime dob { get; set; }
+
+        public string gender { get; set; }
+        public string phoneNum { get; set; }
     }
 
     public class ResetPasswordViewModel

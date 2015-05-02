@@ -70,6 +70,16 @@ a:hover {
   outline: 0;
 }
 
+#jumbo {
+    /* IE8 and below */
+    background: rgb(200, 54, 54);
+    /* all other browsers */
+    background: rgba(200, 54, 54, 0.5);
+}
+#white {
+    background: rgb(255, 255, 255);
+}
+
 h1 {
   margin: 0.67em 0;
   font-size: 2em;
@@ -88,6 +98,20 @@ dfn {
   font-style: italic;
 }
 
+
+.cover{
+    color: rgb(255, 255, 255);
+    position: relative;
+    min-height: 350px;
+    background: url("/Img/Flight_cover.jpg") no-repeat scroll 0px 100% / cover transparent;
+}
+
+nav ul li {
+  list-style:none;
+  float:left;
+  margin-right:50px;
+
+}
 hr {
   height: 0;
   -moz-box-sizing: content-box;
@@ -315,7 +339,11 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
-  background-color: #ffffff;
+  background-color: cornsilk;
+  /*background-image: ("/Img/bg.jpg");*/
+  /*background: url('/Img/bg.jpg'');
+     background-size: 1440px 800px;*/
+     background-repeat:no-repeatdisplay: compact;
 }
 
 input,
@@ -5406,8 +5434,8 @@ a.list-group-item:focus {
 
 .panel-footer {
   padding: 10px 15px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #dddddd;
+  background-color: cornsilk;
+  border-top: 1px solid cornsilk;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
@@ -5440,6 +5468,12 @@ a.list-group-item:focus {
 
 .panel-default {
   border-color: #dddddd;
+}
+
+#footer_container{
+    background-color:cornsilk !important;
+
+
 }
 
 .panel-default > .panel-heading {

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<FlightReservation.Models.Ticket_Flight>
+
+@{
+    ViewBag.Title = "Flight History";
+}
+
+<h2>Your Flights</h2>
+
+<table class="table">
+    <tr>
+        <th>
+
+            Departure Destination
+        </th>
+        <th>
+            Arrival Destination
+        </th>
+        <th>
+           Departure Date
+        </th>
+        <th>
+           Arrival Date
+        </th>
+        <th>
+            Final Price
+        </th>
+        <th>
+            Number of Bags
+        </th>
+        <th>
+            Seat Class
+        </th>
+        <th>
+            Seat Number
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.flight.Departs )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.flight.Arrives)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.flight.Dtime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.flight.Atime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ticket.FinalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ticket.Num_of_bags)
+            </td>
+            <td>
+                @if(item.ticket.SeatClass == 1)
+                {
+                   @("Economy");
+                }
+                else
+                {
+                    @("First Class");
+
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ticket.SeatNum)
+            </td>
+            <td>
+                @if(item.flight.Dtime > DateTime.Now)
+                {
+                    @Html.ActionLink("Cancel Flight", "DeleteUser", new { id = item.ticket.Tid })
+                }
+
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Tid }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Tid }) |
+                @Html.ActionLink("Flght Details", "Details", "flights", new { id = item.Fid }, null) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Tid })*@
+            </td>
+        </tr>
+    }
+
+</table>
+
+    

@@ -12,8 +12,8 @@ namespace FlightReservation.Controllers
     {
         public ActionResult Index()
         {
-                              
-            return View();
+
+            return RedirectToAction("SearchInput", "flights");
         }
 
         public ActionResult About()

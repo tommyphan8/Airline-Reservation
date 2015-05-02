@@ -10,11 +10,13 @@ using FlightReservation.Models;
 
 namespace FlightReservation.Controllers
 {
+   [Authorize(Roles = "admin")]
     public class PassengerController : Controller
     {
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();
 
         // GET: /Passenger/
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             return View(db.passengers.ToList());
@@ -36,6 +38,7 @@ namespace FlightReservation.Controllers
         }
 
         // GET: /Passenger/Create
+        [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +62,7 @@ namespace FlightReservation.Controllers
         }
 
         // GET: /Passenger/Edit/5
+
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -89,6 +93,7 @@ namespace FlightReservation.Controllers
             return View(passenger);
         }
 
+        [Authorize(Roles = "admin")]
         // GET: /Passenger/Delete/5
         public ActionResult Delete(long? id)
         {
