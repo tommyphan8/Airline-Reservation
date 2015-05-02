@@ -186,6 +186,7 @@
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\aircraft.cs">
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>

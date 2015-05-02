@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using FlightReservation.Models;
+using FlightReservation.Controllers;
 
 namespace FlightReservation.Models
 {
-    public class Ticket_Flight
+    public class Admin
     {
-        //public List<ticket> ticket { get; set; }
-        //public List<flight> flight { get; set; }
         public flight flight { get; set; }
         public ticket ticket { get; set; }
 
+
+        
        
     }
 }
