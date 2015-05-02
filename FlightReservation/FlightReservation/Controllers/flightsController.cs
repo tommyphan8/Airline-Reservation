@@ -15,6 +15,10 @@ using Microsoft.AspNet.Identity;
 namespace FlightReservation.Controllers
 {   
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> origin/master
     public class flightsController : Controller
     {
 
@@ -42,6 +46,7 @@ namespace FlightReservation.Controllers
                 DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
                 string dAirport = collection.Get("dAirport");
                 string aAirport = collection.Get("aAirport");
+<<<<<<< HEAD
 
                 var flight = from f in db.flights select f;
 
@@ -54,6 +59,20 @@ namespace FlightReservation.Controllers
             }
            
 
+=======
+
+                var flight = from f in db.flights select f;
+
+
+                flight = flight.Where(s => s.Dtime >= dDate)
+                .Where(s => s.Departs.Contains(dAirport))
+                .Where(s => s.Arrives.Contains(aAirport));
+                return View(flight);
+
+            }
+           
+
+>>>>>>> origin/master
 
             
         }
