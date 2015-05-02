@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FlightReservation.Models;
 using System.Data.Entity.Validation;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FlightReservation.Controllers
 {
@@ -161,6 +162,16 @@ namespace FlightReservation.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+                    var roleManager = new RoleManager<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+
+                    if (!roleManager.RoleExists("user"))
+                        roleManager.Create(new IdentityRole("user"));
+
+                    if (!roleManager.RoleExists("admin"))
+                        roleManager.Create(new IdentityRole("admin"));
+
+                    var role = UserManager.AddToRole(user.Id, "user");
 
                     int pid = random.Next();
 

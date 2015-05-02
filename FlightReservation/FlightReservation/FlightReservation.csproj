@@ -227,6 +227,7 @@
     <Compile Include="Models\ticket.cs">
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ticket_Flight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -331,6 +332,8 @@
     <Content Include="Views\Passenger\Edit.cshtml" />
     <Content Include="Views\Passenger\Index.cshtml" />
     <Content Include="Views\Ticket\Passenger.cshtml" />
+    <Content Include="Views\Ticket\listTicket.cshtml" />
+    <Content Include="Views\Ticket\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

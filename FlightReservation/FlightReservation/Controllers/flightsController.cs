@@ -39,22 +39,8 @@ namespace FlightReservation.Controllers
             
             flight = flight.Where(s => s.Dtime >= dDate)
             .Where(s => s.Departs.Contains(dAirport))
-            .Where(s => s.Departs.Contains(dAirport));
+            .Where(s => s.Arrives.Contains(aAirport));
 
-            var ticket = from t in db.tickets select t;
-            ticket = ticket.Where(s => s.Pid.Equals(123));
-            
-
-
-            string temp = User.Identity.GetUserName();
-            var accountSess = from a in db.accounts select a;
-            accountSess = accountSess.Where(s => s.Email.Contains(temp));
-            var list = accountSess.ToList();
-            var pid = list[0].Pid;
-            System.Diagnostics.Debug.WriteLine(pid);
-                     
-
-          
 
             return View(flight);
         }

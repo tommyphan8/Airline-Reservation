@@ -32,12 +32,48 @@ namespace FlightReservation.Controllers
            
          }
 
-        //public float Price(long Fid)
-        //{
-        //    var flight = from f in db.flights select f;
-        //    flight = flight.Where(s => s.Fid.Equals(Fid));
-        //    retu
-        //}
+
+   
+        public ActionResult listTicket()
+        {
+            long pidLong = Pid();
+            int pid = unchecked((int)pidLong);
+            var ticket = from t in db.tickets select t;
+            var flight = from f in db.flights select f;
+            ticket = ticket.Where(s => s.Pid.Equals(pid));
+            var ticketList = ticket.ToList();
+            var flightList = flight.ToList();
+
+            List<Ticket_Flight> obj = new List<Ticket_Flight>();
+            
+            ticket ticketTemp = new ticket();
+            flight flightTemp = new flight();
+            //List<ticket> list = new List<ticket>();
+            //List<flight> list1 = new List<flight>();
+            
+            foreach (var temp in ticketList)
+            {
+                Ticket_Flight tempp = new Ticket_Flight();
+                tempp.ticket = temp;
+                tempp.flight = flightList.Find(x => x.Fid.Equals(temp.Fid));
+                System.Diagnostics.Debug.WriteLine(tempp.flight.Departs);
+               // System.Diagnostics.Debug.WriteLine(temp.ticket.FinalPrice);
+                obj.Add(tempp);
+            }
+
+            obj.Sort(delegate(Ticket_Flight ps1, Ticket_Flight ps2) { return DateTime.Compare(ps1.flight.Dtime, ps2.flight.Dtime); });
+
+            foreach(var temp in obj)
+            {
+                System.Diagnostics.Debug.WriteLine(temp.flight.Departs);
+            }
+            
+            
+            //System.Diagnostics.Debug.WriteLine(ticket.Count());
+            
+            return View(obj);
+        }
+
 
         // send confirmation email
         public void sendEmail()
@@ -160,16 +196,17 @@ namespace FlightReservation.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket, int Fid)
         {
+            Random random = new Random();
             if (ModelState.IsValid)
             {
                 long tid = db.tickets.Count();
                 flight flight = db.flights.Find(Fid);
                 //ticket.FinalPrice = flight.BasePrice ;
                 ticket.Pid = Pid();
-                ticket.Tid = tid + 1;
+                ticket.Tid = random.Next();
                 db.tickets.Add(ticket);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Ticket", new { id = tid+1 });
+                return RedirectToAction("Details", "Ticket", new { id = ticket.Tid });
             }
 
             return View(ticket);
@@ -232,6 +269,35 @@ namespace FlightReservation.Controllers
             return RedirectToAction("Index");
         }
 
+
+        //Delete ticket for only User's tickets
+        //set up to redirect to listTicket action instead of Index
+        public ActionResult DeleteUser(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ticket ticket = db.tickets.Find(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ticket);
+        }
+
+        // POST: /Ticket/Delete/5
+        [HttpPost, ActionName("DeleteUser")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmedUser(long id)
+        {
+            ticket ticket = db.tickets.Find(id);
+            db.tickets.Remove(ticket);
+            db.SaveChanges();
+            return RedirectToAction("listTicket");
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -241,4 +307,7 @@ namespace FlightReservation.Controllers
             base.Dispose(disposing);
         }
     }
+
+
+
 }
