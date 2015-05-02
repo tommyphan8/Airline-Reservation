@@ -27,13 +27,21 @@
                     <li>@Html.ActionLink("Search Flight", "SearchInput", "flights")</li>
                     <li>@Html.ActionLink("Book a Ticket", "SearchFlight", "Ticket")</li>
                 </ul>
+
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
-    <div class="navbar navbar-default navbar-fixed-bottom" >
+    <div class="jumbotron">
         <div class="container">
             @RenderBody()
+        </div>
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+           
             <hr />
             <footer>
                 <p>&copy; @DateTime.Now.Year - Team Murica</p>

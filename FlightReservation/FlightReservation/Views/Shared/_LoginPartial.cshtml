@@ -38,6 +38,28 @@ else if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
                     </ul>
                 </li>
 
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Account <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Create New User", "register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Create New Flight", "Create", "flights", routeValues: null, htmlAttributes: new { id = "createFlight" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("View Passager", "Index", "Passenger", routeValues: null, htmlAttributes: new { id = "passengerLink" })</li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Account <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Create New User", "register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Create New Flight", "Create", "flights", routeValues: null, htmlAttributes: new { id = "createFlight" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("View Passager", "Index", "Passenger", routeValues: null, htmlAttributes: new { id = "passengerLink" })</li>
+                    </ul>
+                </li>
+
                 <li>@Html.ActionLink("Check All tickets", "Index", "Ticket", routeValues: null, htmlAttributes: new { id = "checkTicket" })</li>
 
 
