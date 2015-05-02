@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using FlightReservation.Models;
 using Microsoft.AspNet.Identity;
 using System.Net.Mail;
+using System.Data.SqlClient;
 
 
 
@@ -22,19 +23,44 @@ namespace FlightReservation.Controllers
 
         public long Pid()
         {
-                string temp = User.Identity.GetUserName();
-                var accountSess = from a in db.accounts select a;
-                accountSess = accountSess.Where(s => s.Email.Contains(temp));
-                var list = accountSess.ToList();
-                long pid = list[0].Pid;
-                System.Diagnostics.Debug.WriteLine(pid);
-                return pid;
-           
-         }
-        
+            string temp = User.Identity.GetUserName();
+            var accountSess = from a in db.accounts select a;
+            accountSess = accountSess.Where(s => s.Email.Contains(temp));
+            var list = accountSess.ToList();
+            long pid = list[0].Pid;
+            System.Diagnostics.Debug.WriteLine(pid);
+            return pid;
+
+        }
 
 
-   
+        public int firstClass(int aid)
+        {
+            var fseat = from a in db.aircraft_seats select a;
+            fseat = fseat.Where(a => a.Aid.Equals(aid));
+            fseat = fseat.Where(a => a.Sid.Equals(2));
+            var list = fseat.ToList();
+            int fnum = list[0].Capacity;
+            return fnum;
+        }
+
+        public int ecoClass(int aid)
+        {
+            var fseat = from a in db.aircraft_seats select a;
+            fseat = fseat.Where(a => a.Aid.Equals(aid));
+            fseat = fseat.Where(a => a.Sid.Equals(1));
+            var list = fseat.ToList();
+            int fnum = list[0].Capacity;
+            return fnum;
+        }
+
+        public int Aid(int Fid)
+        {
+            flight flight = db.flights.Find(Fid);
+            return unchecked((int)flight.Aid);
+        }
+
+
         public ActionResult listTicket()
         {
             long pidLong = Pid();
@@ -46,32 +72,32 @@ namespace FlightReservation.Controllers
             var flightList = flight.ToList();
 
             List<Ticket_Flight> obj = new List<Ticket_Flight>();
-            
+
             ticket ticketTemp = new ticket();
             flight flightTemp = new flight();
             //List<ticket> list = new List<ticket>();
             //List<flight> list1 = new List<flight>();
-            
+
             foreach (var temp in ticketList)
             {
                 Ticket_Flight tempp = new Ticket_Flight();
                 tempp.ticket = temp;
                 tempp.flight = flightList.Find(x => x.Fid.Equals(temp.Fid));
                 System.Diagnostics.Debug.WriteLine(tempp.flight.Departs);
-               // System.Diagnostics.Debug.WriteLine(temp.ticket.FinalPrice);
+                // System.Diagnostics.Debug.WriteLine(temp.ticket.FinalPrice);
                 obj.Add(tempp);
             }
 
             obj.Sort(delegate(Ticket_Flight ps1, Ticket_Flight ps2) { return DateTime.Compare(ps1.flight.Dtime, ps2.flight.Dtime); });
 
-            foreach(var temp in obj)
+            foreach (var temp in obj)
             {
                 System.Diagnostics.Debug.WriteLine(temp.flight.Departs);
             }
-            
-            
+
+
             //System.Diagnostics.Debug.WriteLine(ticket.Count());
-            
+
             return View(obj);
         }
 
@@ -88,7 +114,7 @@ namespace FlightReservation.Controllers
 
             var smptClient = new SmtpClient { EnableSsl = true };
             smptClient.Credentials = CredentialCache.DefaultNetworkCredentials;
-            
+
             try
             {
                 smptClient.Send(mailMessage);
@@ -103,7 +129,7 @@ namespace FlightReservation.Controllers
 
         //error handling code for user who tired to access to ticket
         // GET: /Ticket/
-        [Authorize] 
+        [Authorize]
         public ActionResult Index()
         {
             if (User.IsInRole("admin"))
@@ -117,8 +143,8 @@ namespace FlightReservation.Controllers
             {
                 return RedirectToAction("listTicket");
             }
-           
-            
+
+
         }
 
 
@@ -159,9 +185,12 @@ namespace FlightReservation.Controllers
         public ActionResult Passenger(string fid, float price)
         {
             long temp = Pid();
+            int aid = Aid(int.Parse(fid));
+            int fnum = firstClass(aid);
+            int econum = ecoClass(aid);
             if (temp != null)
             {
-                return RedirectToAction("Create", "Ticket", new { Fid = fid, price = price });
+                return RedirectToAction("Create", "Ticket", new { Fid = fid, price = price, fnum = fnum, econum = econum });
             }
             return View();
         }
@@ -176,9 +205,9 @@ namespace FlightReservation.Controllers
                 passenger.Pid = Pid();
                 db.passengers.Add(passenger);
                 db.SaveChanges();
-                
-                return RedirectToAction("Create", "Ticket", new{ Fid=fid});
-               
+
+                return RedirectToAction("Create", "Ticket", new { Fid = fid });
+
             }
 
             return View(passenger);
@@ -202,8 +231,8 @@ namespace FlightReservation.Controllers
         // GET: /Ticket/Create
         public ActionResult Create(string Fid)
         {
-            
-            
+
+
             return View();
         }
 
@@ -212,7 +241,7 @@ namespace FlightReservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket, int Fid)
+        public ActionResult Create([Bind(Include = "FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket, int Fid)
         {
             Random random = new Random();
             if (ModelState.IsValid)
@@ -250,7 +279,7 @@ namespace FlightReservation.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Tid,FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket)
+        public ActionResult Edit([Bind(Include = "Tid,FinalPrice,Status,SeatNum,SeatClass,Fid,Pid,Num_of_bags")] ticket ticket)
         {
             if (ModelState.IsValid)
             {
