@@ -33,6 +33,23 @@ namespace FlightReservation.Controllers
 
         }
 
+        public string takenSeat(int fid)
+        {
+            var temp = from a in db.tickets select a;
+            temp = temp.Where(a => a.Fid.Equals(fid));
+            var list = temp.ToList();
+            int i, j;
+            string taken = "";
+            foreach (var item in list)
+            {
+                i = item.SeatNum / 10 + 1;
+                j = item.SeatNum % 10;
+                taken += "'"+i + '_' + j + "',";
+            }
+            Console.Write(taken);
+            return taken;
+        }
+
 
         public int firstClass(int aid)
         {
@@ -188,9 +205,11 @@ namespace FlightReservation.Controllers
             int aid = Aid(int.Parse(fid));
             int fnum = firstClass(aid);
             int econum = ecoClass(aid);
+            string taken = takenSeat(int.Parse(fid));
+            Console.WriteLine(taken);
             if (temp != null)
             {
-                return RedirectToAction("Create", "Ticket", new { Fid = fid, price = price, fnum = fnum, econum = econum });
+                return RedirectToAction("Create", "Ticket", new { Fid = fid, price = price, fnum = fnum, econum = econum, arr=taken });
             }
             return View();
         }

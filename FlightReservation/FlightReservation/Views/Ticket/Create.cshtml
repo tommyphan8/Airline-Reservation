@@ -100,15 +100,17 @@
 			var counterS = 0;
 
 			$(document).ready(function() {
-				var $cart = $('#selected-seats'),
+			    var $cart = $('#selected-seats'),
 					$counter = $('#counter'),
 					$total = $('#total'),
+                    $test = $('#test'),
                     $FinalPrice = $('#FinalPrice'),
                     $numbag = 0,
                     $basePrice = @Request.Params["price"],
-                    fnum = @Request.Params["fnum"],
+                    fnum = @Request.Params["fnum"],                    
                     econum = @Request.Params["econum"];
 			    var seatmap =[], i;
+			    //var list = decodeURIComponent(@Request.Params["arr"].ToString());
 			    for(i=0;i<fnum/10;i++){
 			        seatmap.push('ffffffffff');
 			    }
@@ -201,25 +203,38 @@
 			    //when user change seat class
 				$(".seat_class").change(function () {
 				    if (this.value == 1) {//user pick eco class
-				        sc.get(['1_1', '1_2', '1_3', '1_4']).status('unavailable');
-				        sc.get(['2_1', '2_2', '2_4', '2_5',
-				                '3_1', '3_2', '3_4', '3_5',
-				                '4_1', '4_2', '4_4', '4_5',
-				                '5_1', '5_2',
-				                '6_1', '6_2', '6_4', '6_5',
-				                '7_1', '7_2', '7_4', '7_5',
-				                '8_1', '8_2', '8_4', '8_5',
-				                '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('available');
+				        var i,j,r,c,temp;
+				        var unavailable=[];
+				        for(i=0;i<fnum;i++){
+				            r=fnum/10 +1;
+				            c=fnum%10;
+				            temp="'"+r + "_"+c+"',";
+				            unavailable.push(temp);
+				        }
+
+
+				        $test.text(unavailable);
+				        sc.get(unavailable).status('unavailable');
+				        sc.get('1_1').status('unavailable');
+				        //sc.get(['1_1', '1_2', '1_3', '1_4']).status('unavailable');
+				        //sc.get(['2_1', '2_2', '2_4', '2_5',
+				        //        '3_1', '3_2', '3_4', '3_5',
+				        //        '4_1', '4_2', '4_4', '4_5',
+				        //        '5_1', '5_2',
+				        //        '6_1', '6_2', '6_4', '6_5',
+				        //        '7_1', '7_2', '7_4', '7_5',
+				        //        '8_1', '8_2', '8_4', '8_5',
+				        //        '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('available');
 				    } else if (this.value == 2) { // user pick first class
-				        sc.get(['1_1', '1_2', '1_3', '1_4']).status('available');
-				        sc.get(['2_1', '2_2', '2_4', '2_5',
-				                '3_1', '3_2', '3_4', '3_5',
-				                '4_1', '4_2', '4_4', '4_5',
-				                '5_1', '5_2',
-				                '6_1', '6_2', '6_4', '6_5',
-				                '7_1', '7_2', '7_4', '7_5',
-				                '8_1', '8_2', '8_4', '8_5',
-				                '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('unavailable');
+				        //sc.get(['1_1', '1_2', '1_3', '1_4']).status('available');
+				        //sc.get(['2_1', '2_2', '2_4', '2_5',
+				        //        '3_1', '3_2', '3_4', '3_5',
+				        //        '4_1', '4_2', '4_4', '4_5',
+				        //        '5_1', '5_2',
+				        //        '6_1', '6_2', '6_4', '6_5',
+				        //        '7_1', '7_2', '7_4', '7_5',
+				        //        '8_1', '8_2', '8_4', '8_5',
+				        //        '9_1', '9_2', '9_3', '9_4', '9_5', ]).status('unavailable');
 				    }
 
 				});
