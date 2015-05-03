@@ -23,18 +23,9 @@
             @Html.EditorFor(model => model.SeatNum)
             @Html.ValidationMessageFor(model => model.SeatNum)
         </div>
-
-
-        <div class="form-group">
-            @Html.Label("Pick a Seat Class", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.SeatClass, new List<SelectListItem>
-           {
-               new SelectListItem{Text = "Economy Class", Value = "1", Selected=true},
-               new SelectListItem{Text = "First Class", Value ="2" }
-           }, new { @class = "seat_class" })
-            </div>
-        </div>
+        <div hidden>
+            @Html.EditorFor(model => model.SeatClass)
+        </div>      
 
         <div class="form-group">
             @Html.Label("Number of Bags", new { @class = "control-label col-md-2" })
@@ -64,6 +55,7 @@
                     <h3> Selected Seats (<span id="counter">0</span>):</h3>
                     <ul id="selected-seats"></ul>
 
+                   <!-- Total: <b>$<span id="total" value=@Request.Params["price"]>0</span></b> --> 
                     Total: <b>$<span id="total" value=@Request.Params["price"]>0</span></b>
 
                     <div id="legend"></div>
@@ -104,6 +96,7 @@
 					$counter = $('#counter'),
 					$total = $('#total'),
                     $test = $('#test'),
+                    $seat_class = $('#seatClass'),
                     $FinalPrice = $('#FinalPrice'),
                     $numbag = 0,
                     $basePrice = @Request.Params["price"],
@@ -171,7 +164,12 @@
 								.data('seatId', this.settings.id)
 								.appendTo($cart);
 							$("#SeatNum").val(this.settings.label);
-
+							if(this.data().category == "First Class"){
+							    $("#SeatClass").val("2");
+							} else{
+							    $("#SeatClass").val("1");
+							}
+							
 							/*
 							 * Lets update the counter and total
 							 *
@@ -203,9 +201,7 @@
 						}
 					}
 				});
-
-
-
+                
 				//this will handle "[cancel]" link clicks
 				$('#selected-seats').on('click', '.cancel-cart-item', function () {
 					//let's just trigger Click event on the appropriate seat, so we don't have to repeat the logic here
@@ -230,8 +226,7 @@
 				            funavailable.push(temp);
 				        }
 				        funavailable+="'"+(fnum/10+1)+"_"+(fnum%10)+"'";
-				        sc.get([funavailable]).status('unavailable');
-				        
+				        sc.get([funavailable]).status('unavailable');				        
 				        
 				    } else if (this.value == 2) { // user pick first class
 				        //sc.get(['1_1', '1_2', '1_3', '1_4']).status('available');

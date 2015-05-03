@@ -224,7 +224,9 @@ namespace FlightReservation.Controllers
             Console.WriteLine(taken);
             if (temp != null)
             {
+                //return RedirectToAction("Create", "Ticket", Json(new { Fid = fid, price = price, fnum = fnum, econum = econum, arr = taken }));
                 return RedirectToAction("Create", "Ticket", new { Fid = fid, price = price, fnum = fnum, econum = econum, arr=taken });
+               // return RedirectToAction("Create", "Ticket", new { Fid = fid, price = price, fnum = fnum, econum = econum },Json(new{arr=taken}));
             }
             return View();
         }
