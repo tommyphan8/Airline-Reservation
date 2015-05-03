@@ -12,7 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FinalPrice)
+            @Html.Label("Total")
         </dt>
 
         <dd>
@@ -24,11 +24,19 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @{
+                if (Model.Status == true)
+                {
+                    @Html.Label("Paid")
+                } else
+                {
+                    @Html.Label("UnPaid")
+                }
+            }            
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SeatNum)
+            @Html.Label("Seat Number")
         </dt>
 
         <dd>
@@ -36,31 +44,26 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SeatClass)
+            @Html.Label("Seat class")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SeatClass)
+            @{
+                if(Model.SeatClass == 1)
+                {
+                    @Html.Label("Economy class")
+                } else
+                {
+                    @Html.Label("First class")
+                }
+            }
+           
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Fid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fid)
-        </dd>
+        
 
         <dt>
-            @Html.DisplayNameFor(model => model.Pid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Num_of_bags)
+            @Html.Label("Number of bags")
         </dt>
 
         <dd>
