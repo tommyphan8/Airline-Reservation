@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity;
 namespace FlightReservation.Controllers
 {   
     
-    [Authorize]
+    
     public class flightsController : Controller
     {
 
@@ -40,6 +40,7 @@ namespace FlightReservation.Controllers
             flight = flight.Where(s => s.Dtime >= dDate)
             .Where(s => s.Departs.Contains(dAirport))
             .Where(s => s.Departs.Contains(dAirport));
+
 
             var ticket = from t in db.tickets select t;
             ticket = ticket.Where(s => s.Pid.Equals(123));
