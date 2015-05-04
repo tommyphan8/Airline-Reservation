@@ -1,17 +1,57 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<script>
+    var myCenter = new google.maps.LatLng(33.87833, -117.88426);
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    function initialize() {
+        var mapProp = {
+            center: myCenter,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+        var marker = new google.maps.Marker({
+            position: myCenter,
+        });
+
+        marker.setMap(map);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6">
+
+            <br />
+            <h2>ADDRESS</h2>
+            <br />
+            <address>
+                <strong>Murica! Air</strong><br>
+                999 Murica Ave, Suite 999<br>
+                Grant Theft Autonew, CA 99999,USA<br>
+                <abbr title="Phone">P:</abbr> (899)-Mur-Ica!
+            </address>
+
+
+
+        </div>
+        <div class="col-xs-6">
+
+            <div id="googleMap" style="width:500px;height:380px;"></div>
+
+        </div>
+    </div>
+</div>
+    
+
+
+
+
+

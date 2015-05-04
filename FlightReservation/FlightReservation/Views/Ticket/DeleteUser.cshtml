@@ -1,0 +1,84 @@
+﻿@model FlightReservation.Models.ticket
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ticket</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Label("Total")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @{
+                if (Model.Status == true)
+                {
+                    @Html.Label("Paid")
+                } else
+                {
+                    @Html.Label("UnPaid")
+                }
+            }            
+        </dd>
+
+        <dt>
+            @Html.Label("Seat Number")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeatNum)
+        </dd>
+
+        <dt>
+            @Html.Label("Seat class")
+        </dt>
+
+        <dd>
+            @{
+                if(Model.SeatClass == 1)
+                {
+                    @Html.Label("Economy class")
+                } else
+                {
+                    @Html.Label("First class")
+                }
+            }
+           
+        </dd>
+
+        
+
+        <dt>
+            @Html.Label("Number of bags")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Num_of_bags)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "listTicket")
+        </div>
+    }
+</div>

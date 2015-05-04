@@ -10,6 +10,7 @@ using FlightReservation.Models;
 
 namespace FlightReservation.Controllers
 {
+    [Authorize(Roles="admin")]
     public class accountsController : Controller
     {
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();

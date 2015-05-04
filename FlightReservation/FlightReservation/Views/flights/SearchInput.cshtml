@@ -1,21 +1,63 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "SearchInput";
 }
 
-<h2>Search For Flights</h2>
+    <div class="cover">
+        <div class="clearfix"></div>
+
+    </div>
+
 
 @using (Html.BeginForm("SearchResult", "flights"))
 {
+
+
     <form>
-        
-        Departure Date: <input id="Departure" name="dDate" type="date"> <br />
-        @*Arrival Date: <input id="Arrival" name="aDate" type="date"> <br />*@
-        Departure Airport<input type="text" name="dAirport" /> <br />
-        Arrival Airport<input type="text" name="aAirport" /> <br />
-                
-        <input type="submit" value="Submit">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Departure Date</span>
+                <input type="date" id="Departure" name="dDate" class="form-control" aria-describedby="basic-addon1">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Departure Airport</span>
+                <input type="text" name="dAirport" class="form-control" placeholder="Depart AirPort Name" aria-describedby="basic-addon2">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Arrival Airport</span>
+                <input type="text" name="aAirport" class="form-control" placeholder="Arrive AirPort Name" aria-describedby="basic-addon3">
+            </div>
+
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-default">
+
 
     </form>
-    
+
+
+
+
+    @*<div class="row">
+                <div class="col-md-8">
+                    <form>
+                        <div class="form-group">
+
+                            Departure Date: &nbsp; &nbsp;<input id="Departure" name="dDate" type="date"> <br>
+                            </div>
+                            Departure Airport:&nbsp;<input type="text" name="dAirport"> <br>
+                            Arrival Airport: &nbsp; &nbsp; &nbsp;&nbsp;<input type="text" name="aAirport"> <br>
+
+                            <input type="submit" value="Submit">
+        </form>
+                    </div>
+                </div>*@
+
 }
+
+

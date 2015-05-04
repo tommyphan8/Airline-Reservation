@@ -1,11 +1,12 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("user"))
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Flight History", "listTicket", "Ticket", routeValues: null, htmlAttributes: new { id = "listTicket" })</li>
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
@@ -13,10 +14,69 @@
     </ul>
     }
 }
+else if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("admin"))
+{
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+
+       
+            @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <div class="collapse navbar-collapse" id="NavBar_1">
+            <ul class="nav navbar-nav">
+               
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Account <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Create New User", "register", "Account", routeValues: null, htmlAttributes: new { id = "1" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("List All Account", "Index", "accounts", routeValues: null, htmlAttributes: new { id = "2" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("List All Passager", "Index", "Passenger", routeValues: null, htmlAttributes: new { id = "3" })</li>
+                    
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Flight <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("List All Flight", "Index", "flights", routeValues: null, htmlAttributes: new { id = "5" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Create New Flight", "Create", "flights", routeValues: null, htmlAttributes: new { id = "6" })</li>
+           
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage Ticket <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Check All tickets", "Index", "Ticket", routeValues: null, htmlAttributes: new { id = "8" })</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Create Ticket", "Create", "Ticket", routeValues: null, htmlAttributes: new { id = "9" })</li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    @Html.ActionLink("Hello Admin " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>
+
+
+
+                    
+                   
+    </ul>
+    }
+
+}
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
-}
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Register", "register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+            </ul>
+            }

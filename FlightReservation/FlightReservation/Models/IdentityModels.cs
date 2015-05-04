@@ -3,6 +3,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace FlightReservation.Models
 {
@@ -16,7 +19,19 @@ namespace FlightReservation.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public string firstName { get; set; }
+        public string middleName { get; set; }
+        public string lastName { get; set; }
+
+        [Display(Name ="Date of Birth")]
+        [DataType(DataType.Date)]
+        public DateTime dob { get; set; }
+
+        public string gender { get; set; }
+        public string  phoneNum { get; set; }
+        
     }
+
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

@@ -15,13 +15,17 @@ using Microsoft.AspNet.Identity;
 namespace FlightReservation.Controllers
 {   
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> 658fb7b5149dc9174254f60459dc13baa65d20f7
     public class flightsController : Controller
     {
 
         private db_9c079b_airlineEntities db = new db_9c079b_airlineEntities();
 
         // GET: flights
+        [Authorize(Roles="admin")]
         public ActionResult Index()
         {
             
@@ -29,35 +33,40 @@ namespace FlightReservation.Controllers
         }
         public ActionResult SearchResult(FormCollection collection)
         {
-            DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
-            DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
-            string dAirport = collection.Get("dAirport");
-            string aAirport = collection.Get("aAirport");
+            var check = collection.Get("dDate");
+            if (check == "")
+            {
+                //just an error catch, tried js client side, didnt work. this is for temporary fix only
+                ModelState.AddModelError("Departure", "Please select a Date");
+                return RedirectToAction("SearchResult");
+            }
+            else
+            {
+                DateTime dDate = Convert.ToDateTime(collection.Get("dDate"));
+                DateTime aDate = Convert.ToDateTime(collection.Get("aDate"));
+                string dAirport = collection.Get("dAirport");
+                string aAirport = collection.Get("aAirport");
 
-            var flight = from f in db.flights select f;
+                var flight = from f in db.flights select f;
 
-            
-            flight = flight.Where(s => s.Dtime >= dDate)
-            .Where(s => s.Departs.Contains(dAirport))
-            .Where(s => s.Departs.Contains(dAirport));
 
+<<<<<<< HEAD
 
             var ticket = from t in db.tickets select t;
             ticket = ticket.Where(s => s.Pid.Equals(123));
             
+=======
+                flight = flight.Where(s => s.Dtime >= dDate)
+                .Where(s => s.Departs.Contains(dAirport))
+                .Where(s => s.Arrives.Contains(aAirport));
+                return View(flight);
+>>>>>>> 658fb7b5149dc9174254f60459dc13baa65d20f7
+
+            }
+           
 
 
-            string temp = User.Identity.GetUserName();
-            var accountSess = from a in db.accounts select a;
-            accountSess = accountSess.Where(s => s.Email.Contains(temp));
-            var list = accountSess.ToList();
-            var pid = list[0].Pid;
-            System.Diagnostics.Debug.WriteLine(pid);
-                     
-
-          
-
-            return View(flight);
+            
         }
         public ActionResult SearchInput()
         {
@@ -80,6 +89,7 @@ namespace FlightReservation.Controllers
         }
 
         // GET: flights/Create
+        [Authorize(Roles="admin")]
         public ActionResult Create()
         {
             return View();
@@ -103,6 +113,7 @@ namespace FlightReservation.Controllers
         }
 
         // GET: flights/Edit/5
+         [Authorize(Roles = "admin")]
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -133,6 +144,7 @@ namespace FlightReservation.Controllers
             return View(flight);
         }
 
+        [Authorize(Roles = "admin")]
         // GET: flights/Delete/5
         public ActionResult Delete(long? id)
         {

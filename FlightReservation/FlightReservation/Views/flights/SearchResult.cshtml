@@ -53,7 +53,11 @@
                 @Html.DisplayFor(modelItem => item.Aid)
             </td>
             <td>
+<<<<<<< HEAD
                 @Html.ActionLink("Book", "Passenger", "Ticket", new { fid = item.Fid }, null) 
+=======
+                @Html.ActionLink("Book", "Passenger", "Ticket", new { fid = item.Fid, price = item.BasePrice }, null) 
+>>>>>>> 658fb7b5149dc9174254f60459dc13baa65d20f7
                 @*@Html.ActionLink("Details", "Details", new { id = item.Fid })*@ 
                
             </td>

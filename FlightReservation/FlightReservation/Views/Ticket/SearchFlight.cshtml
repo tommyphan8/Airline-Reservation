@@ -3,10 +3,11 @@
     ViewBag.Title = "Search for a flight";
 }
 
-<h2>Search For a Flights</h2>
 
-@using (Html.BeginForm("SearchResult","Ticket"))
+
+@using (Html.BeginForm("SearchResult", "Ticket"))
 {
+    <h2>Search For a Flights</h2>
     <p>
   
         From: @Html.TextBox("depart_input")

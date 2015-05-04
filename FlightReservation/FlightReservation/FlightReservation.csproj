@@ -186,6 +186,7 @@
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\aircraft.cs">
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>
@@ -227,6 +228,7 @@
     <Compile Include="Models\ticket.cs">
       <DependentUpon>airline.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ticket_Flight.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -234,6 +236,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery.seat-charts.css" />
+    <Content Include="Content\SeatStylecss.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -331,6 +334,8 @@
     <Content Include="Views\Passenger\Edit.cshtml" />
     <Content Include="Views\Passenger\Index.cshtml" />
     <Content Include="Views\Ticket\Passenger.cshtml" />
+    <Content Include="Views\Ticket\listTicket.cshtml" />
+    <Content Include="Views\Ticket\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
