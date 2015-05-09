@@ -15,10 +15,6 @@ using Microsoft.AspNet.Identity;
 namespace FlightReservation.Controllers
 {   
     
-<<<<<<< HEAD
-    
-=======
->>>>>>> 658fb7b5149dc9174254f60459dc13baa65d20f7
     public class flightsController : Controller
     {
 
@@ -50,17 +46,16 @@ namespace FlightReservation.Controllers
                 var flight = from f in db.flights select f;
 
 
-<<<<<<< HEAD
+
 
             var ticket = from t in db.tickets select t;
             ticket = ticket.Where(s => s.Pid.Equals(123));
             
-=======
+
                 flight = flight.Where(s => s.Dtime >= dDate)
                 .Where(s => s.Departs.Contains(dAirport))
                 .Where(s => s.Arrives.Contains(aAirport));
                 return View(flight);
->>>>>>> 658fb7b5149dc9174254f60459dc13baa65d20f7
 
             }
            
